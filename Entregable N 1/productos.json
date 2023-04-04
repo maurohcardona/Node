@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "Usuariossss",
+        "description": "holhola",
+        "price": 49,
+        "thumbnail": "img/thumbnail",
+        "code": 49,
+        "stock": 500
+    },
+    {
+        "id": 2,
+        "title": "holasssss",
+        "description": "como estasSSSS",
+        "price": "http://",
+        "thumbnail": "44",
+        "code": 10000000,
+        "stock": 200
+    }
+]
