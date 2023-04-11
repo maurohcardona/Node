@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "shampoo",
+        "description": "shampoo",
+        "price": 49,
+        "thumbnail": "img/thumbnail",
+        "code": 10,
+        "stock": 500
+    },
+    {
+        "id": 2,
+        "title": "crema de enjuague",
+        "description": "crema de enjuague",
+        "price": 1000,
+        "thumbnail": "44",
+        "code": 11,
+        "stock": 200
+    },
+    {
+        "id": 3,
+        "title": "Jabon",
+        "description": "jabon",
+        "price": 2000,
+        "thumbnail": "44",
+        "code": 12,
+        "stock": 200
+    },
+    {
+        "id": 4,
+        "title": "espuma",
+        "description": "espuma",
+        "price": 3000,
+        "thumbnail": "44",
+        "code": 13,
+        "stock": 200
+    }
+]
