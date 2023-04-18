@@ -12,31 +12,40 @@ class ProductManager {
     }
      
     
-     async addproducts(title = isRequired(), description = isRequired(), price = isRequired(), thumbnail = isRequired(), code = isRequired(), stock = isRequired()) {
+     async addproducts(producto) {
 
         
        
         const id = this.path.length + 1
         
-        const producto = {
+        const nuevoProducto = {
         id,
-        title: title,
-        description: description,
-        price: price,
-        thumbnail: thumbnail,
-        code: code,
-        stock: stock
+        title: producto.title,
+        description: producto.description,
+        price: producto.price,
+        thumbnail: producto.thumbnail,
+        code: producto.code,
+        stock: producto.stock
         }
         
-
-        if((stock || title || code || description || price || thumbnail || stock) === undefined) {
-            console.log('Falta completar algun campo')
-        }
-        else if(this.path.find(p => p.code === code)){
+        const {stock, title, code, description, price, thumbnail} = nuevoProducto
+        if((!stock )) {
+            console.log('Falta completar el stock')
+        }else if(!title){
+            console.log('Falta completar el titulo')
+        }else if (!code){
+            console.log('Falta completar el codigo')
+        }else if(!description){
+            console.log('Falta completar la descripcion')
+        }else if (!price){
+            console.log('Falta completar el precio')
+        } else if(!thumbnail){
+            console.log('Falta completar el thumbnail')
+        }else if(this.path.find(p => p.code === code)){
             console.log('El codigo ya existe')
        }
         else  {
-            this.path.push(producto)
+            this.path.push(nuevoProducto)
             const productos = JSON.stringify(this.path)
             await fs.promises.writeFile('./productos.json', productos)
         }  
@@ -103,9 +112,14 @@ const producto = new ProductManager()
 //producto.getProducts()
 
 
-const modificarUsuario = {
-    thumbnail:'img/thumbnail',
-    id:100
+const newProduct = {
+    //id: 10,
+    //title: "nuevo producto",
+    description: "nuevo producto",
+    price: 1000,
+    thumbnail: "44",
+    code: 2020,
+    stock: 200
 }
 
-producto.updateProduct(1,modificarUsuario)
+producto.addproducts(newProduct)
