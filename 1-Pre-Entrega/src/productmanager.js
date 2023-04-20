@@ -11,7 +11,7 @@ class ProductManager {
     
     async addproducts(producto) {
 
-        
+
        
         const id = this.path.length + 1
         
@@ -21,7 +21,7 @@ class ProductManager {
         description: producto.description,
         price: producto.price,
         status: producto.status?? true,
-        thumbnail: producto.thumbnail,
+        thumbnail: producto.thumbnail?? [],
         code: producto.code,
         stock: producto.stock,
         category: producto.category

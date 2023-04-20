@@ -18,9 +18,9 @@ routerProducts.get("/:pid", async (req, res) => {
     const pid = parseInt(req.params.pid);
     usuarioId = await producto.path.find(producto => producto.id === pid);
     if (!usuarioId) {
-        return res.status(404).send('Usuario no encontrado')
+        return res.status(404).send('Producto no encontrado')
     } else {
-        res.send({usuarioId})
+        res.status(200).send({Producto: usuarioId})
     }
 })
 
@@ -43,7 +43,10 @@ routerProducts.post('/', async (req, res) => {
         res.status(500).send('El codigo ya existe')
     }else {
     producto.addproducts(newProduct)
-    res.status(200).send('product added successfully')
+    res.status(200).send({
+        Message:'product added successfully',
+        Product: producto.path.find(p => p.title === title)
+    })
     }
 })
 
@@ -59,7 +62,9 @@ routerProducts.put('/:pid', (req, res) => {
             res.status(500).end('El codigo ya existe')
         }
     producto.updateProduct(pid,changeProduct)
-    res.status(200).send('product change successfully')
+    res.status(200).send({
+        Message: 'product change successfully',
+        Product: filtroId})
 })
 
 routerProducts.delete('/:pid', (req, res) => {
