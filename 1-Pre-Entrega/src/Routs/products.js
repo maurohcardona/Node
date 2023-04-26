@@ -64,7 +64,8 @@ routerProducts.put('/:pid', (req, res) => {
     producto.updateProduct(pid,changeProduct)
     res.status(200).send({
         Message: 'product change successfully',
-        Product: filtroId})
+        Product: filtroId
+    })
 })
 
 routerProducts.delete('/:pid', (req, res) => {
