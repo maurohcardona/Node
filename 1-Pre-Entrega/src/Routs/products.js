@@ -2,6 +2,8 @@ const express = require('express')
 const ProductManager = require('../productmanager')
 const producto = new ProductManager()
 
+
+
 const routerProducts = express.Router();
 
 routerProducts.get('/', async (req, res) => {
@@ -11,7 +13,7 @@ routerProducts.get('/', async (req, res) => {
         return (res.send({primerosProductos}))
     }
     
-    res.send({producto});
+    res.render('home', {products: producto.path} )
 })
 
 routerProducts.get("/:pid", async (req, res) => {
