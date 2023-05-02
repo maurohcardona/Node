@@ -1,5 +1,62 @@
-<div>
-    <h1>holsa</h1>
+<div class="container">
+    <aside class="items">
+        <h1>Todos los productosss</h1>
+        <div id="hh" class = 'cards'>
+        {{#each products}}
+
+        <div class="card">
+            <h3>{{title}}</h3>
+            <p>{{description}}</p>
+            <p>Price: ${{price}}</p>
+            <p>Stock: {{stock}}</p>
+        </div>
+
+        {{/each}}
+        </div>
+        
+    </aside>
+    <div class="forms">
+        <form id="form" class="form1">
+            <h2>Ingresar productos</h2>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div>
+                <label for="description">Desciption</label>
+                <input type="text" name="description" id="description" required>
+            </div>
+            <div>
+                <label for="price">Price</label>
+                <input type="number" name="price" id="price" required>
+            </div>
+            <div>
+                <label for="stock">Stock</label>
+                <input type="number" name="stock" id="stock" required>
+            </div>
+            <div>
+                <label for="thumbnail">thumbnail</label>
+                <input type="text" name="thumbnail" id="thumbnail" required>
+            </div>
+            <div>
+                <label for="code">Code</label>
+                <input type="number" name="code" id="code" required>
+            </div>
+            <div>
+                <label for="category">Category</label>
+                <input type="text" name="category" id="category" required>
+            </div>
+            <button>enviar</button>
+        </form>
+        <form id="deleteform" class="form1">
+            <h2>Eliminar productos</h2>
+            <div>
+                <label for="id">Id</label>
+                <input type="number" name="id" id="id" required>
+            </div>
+                <button>Eliminar</button>
+        </form>
+    </div>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>

@@ -13,7 +13,10 @@ routerProducts.get('/', async (req, res) => {
         return (res.send({primerosProductos}))
     }
     
-    res.render('home', {products: producto.path} )
+    res.render('home', {
+        title: 'products',
+        products: producto.path
+    } )
 })
 
 routerProducts.get("/:pid", async (req, res) => {
