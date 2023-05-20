@@ -56,5 +56,16 @@
         "code": "393948",
         "stock": "29",
         "category": "Ropa de cama"
+    },
+    {
+        "id": 7,
+        "title": "Acolchado",
+        "description": "para taparme",
+        "price": "20000",
+        "status": "",
+        "thumbnail": "ww",
+        "code": "20209",
+        "stock": "10",
+        "category": "Ropa de cama"
     }
 ]
