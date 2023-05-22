@@ -1,5 +1,6 @@
-const express = require('express')
-const ProductManager = require('../productmanager')
+import  express  from 'express'
+//const ProductManager = require('../productmanager')
+import ProductManager from '../productmanager'
 const producto = new ProductManager()
 
 const routerRealTimeProducts = express.Router()
@@ -11,4 +12,4 @@ routerRealTimeProducts.get('/', (req, res) => {
     } )
 })
 
-module.exports =  routerRealTimeProducts
+export default routerRealTimeProducts

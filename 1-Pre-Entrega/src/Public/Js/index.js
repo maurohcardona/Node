@@ -2,13 +2,13 @@ const socket = io()
 
 
 const form = document.getElementById('form')
-const title = document.getElementById('title')
-const description = document.getElementById('description')
-const price = document.getElementById('price')
-const thumbnail = document.getElementById('thumbnail')
-const code = document.getElementById('code')
-const stock = document.getElementById('stock')
-const category = document.getElementById('category')
+const title = document.getElementById('Title')
+const description = document.getElementById('Description')
+const price = document.getElementById('Price')
+const thumbnail = document.getElementById('Thumbnail')
+const code = document.getElementById('Code')
+const stock = document.getElementById('Stock')
+const category = document.getElementById('Category')
 
 const deleteForm = document.getElementById('deleteform')
 const id = document.getElementById('id')
@@ -29,20 +29,22 @@ form.addEventListener('submit', (e) => {
     
     
     socket.emit('newProduct',{
-        title: title.value,
-        description: description.value,
-        price: price.value,
-        thumbnail: thumbnail.value,
-        code: code.value,
-        stock: stock.value,
-        category: category.value,
-        status
+        Title: title.value,
+        Description: description.value,
+        Price: price.value,
+        Thumbnail: thumbnail.value,
+        Code: code.value,
+        Stock: stock.value,
+        Category: category.value,
     })
+    blankvalues()
 
-    socket.on('sendProducts', data => {
+
+        socket.on('sendProducts',async data => {
         let productos = document.getElementById('hh')
         let products = ''
-        data.forEach(element => {
+        //console.log(data)
+        await data.forEach(element => {
             products = products + `
             <div class="card">
             <h3>${element.title}</h3>
@@ -52,10 +54,11 @@ form.addEventListener('submit', (e) => {
             </div>`
         });
         productos.innerHTML = products
-        blankvalues()
+        
     })
-    
 })
+    
+
 
 deleteForm.addEventListener('submit', (e) => {
     e.preventDefault()

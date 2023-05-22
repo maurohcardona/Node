@@ -1,7 +1,10 @@
-const express = require('express');
-const CartManager = require('../cartManager')
+//const express = require('express');
+import express from 'express';
+//const CartManager = require('../cartManager')
+import CartManager from '../cartManager';
 const cart = new CartManager()
-const ProductManager = require('../productmanager')
+//const ProductManager = require('../productmanager')
+import ProductManager from '../productmanager';
 const producto = new ProductManager()
 
 const routerCarts = express.Router()
@@ -39,4 +42,4 @@ routerCarts.post('/:cid/product/:pid', async (req, res) => {
     }
 })
 
-module.exports = routerCarts
+export default routerCarts

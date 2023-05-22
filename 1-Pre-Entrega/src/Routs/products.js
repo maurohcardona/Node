@@ -1,5 +1,7 @@
-const express = require('express')
-const ProductManager = require('../productmanager')
+
+import express from 'express'
+
+import ProductManager from '../productmanager';
 const producto = new ProductManager()
 
 
@@ -85,4 +87,4 @@ routerProducts.delete('/:pid', (req, res) => {
 
 })
 
-module.exports = routerProducts
+export default routerProducts
