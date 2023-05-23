@@ -7,32 +7,32 @@ const collection = 'products';
 const schema = new mongoose.Schema({
     Title: {
         type: String,
-        //required: true,
+        
     },
     Description: {
         type: String,
-        //required: true,
+        
     },
     Price: {
         type: Number,
-        //required: true,
+        
     },
 
     Thumbnail: {
         type: String,
-        //required: true,
+        
     },
     Code: {
         type: Number,
-        //required: true,
+        
     },
     Stock: {
         type: Number,
-        //required: true,
+        
     },
     Category: {
         type: String,
-        //required: true,
+        
     }
 
 });

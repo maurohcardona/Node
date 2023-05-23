@@ -4,11 +4,11 @@ import db from './db.js';
 const collection = 'messages';
 
 const schema = new mongoose.Schema({
-    User: {
+    user: {
         type: String,
         required: true
     },
-    Message: {
+    message: {
         type: String,
         required: true
     }

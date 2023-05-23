@@ -1,28 +1,26 @@
 import  express  from 'express';
 const app = express();
 import path from 'path';
-import productManager from './dao/Controllers/productmanager.js';
-
-
-//const routerCarts = require('./Routs/carts.js')
-//import routerCarts from './Routs/carts.js';
-//const routerRealTimeProducts = require('./Routs/realTimeProducts.js')
-//import routerRealTimeProducts from './Routs/realTimeProducts.js'
-const PORT = 8080
 import __dirname from './utils.js';
 import productRouter from './dao/Routs/products.js';
 import cartRouter from './dao/Routs/carts.js';
 import messageManager from './dao/Controllers/messagemanager.js';
-//const { Server } = require('socket.io')
 import { Server } from 'socket.io'
-//const ProductManager = require('./productmanager')
-//import ProductManager from './productmanager.js';
-//const producto = new ProductManager()
-
 import { engine }  from "express-handlebars";
-import routerCarts from './Routs/carts.js';
 import messageRouter from './dao/Routs/messages.js';
 
+//Esto va con filesystem
+//import routerRealTimeProducts from './Routs/realTimeProducts.js'
+//import routerCarts from './Routs/carts.js';
+//import ProductManager from './productmanager.js';
+//const producto = new ProductManager()
+//import routerCarts from './Routs/carts.js';
+//app.use('/api/carts', routerCarts)
+//app.use ('/realtimeproducts', routerRealTimeProducts )
+//app.use(express.static(__dirname + '/Public'))
+
+
+const PORT = 8080
 
 const publics = path.join(__dirname, './public');
 
@@ -37,9 +35,7 @@ app.use(express.urlencoded({ extended: true } ))
 app.use('/', productRouter)
 app.use('/', cartRouter)
 app.use('/', messageRouter);
-//app.use('/api/carts', routerCarts)
-//app.use ('/realtimeproducts', routerRealTimeProducts )
-//app.use(express.static(__dirname + '/Public'))
+
 
 app.get('/api/', (req, res) => {
     res.send('Node curse');
@@ -60,7 +56,6 @@ io.on('connection', socket => {
         await MessageManager.createMessage(data);
         const mensajes = await MessageManager.getMessage()
         io.emit('messages', mensajes);
-        console.log(mensajes);
     })
 
     

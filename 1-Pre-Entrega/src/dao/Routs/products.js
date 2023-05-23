@@ -3,8 +3,6 @@ const productRouter = express.Router();
 
 import productManager from "../Controllers/productmanager.js";
 
-//productRouter.get('/products', (req, res) => {res.render('realTimeProducts')})
-
 productRouter.post('/products',async (req, res) => {
     const {Title, Description, Price, Stock, Thumbnail,Code, Category} = req.body;
     if((!Stock )) {

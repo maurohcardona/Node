@@ -1,0 +1,13 @@
+<div>
+    <h1>Home</h1>
+    <form action="/chats" id="form">
+    <label for="user">Usuario</label>
+    <input type="text" id="user" name="user">
+    <label for="message">Mensaje</label>
+    <input id="message" name="message">
+    <button type="submit">Enviar</button>
+    </form>
+    <p id="log"></p>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/Js/chats.js"></script>
