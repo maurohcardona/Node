@@ -11,6 +11,7 @@ import productManager from './dao/Controllers/productmanager.js';
 const PORT = 8080
 import __dirname from './utils.js';
 import productRouter from './dao/Routs/products.js';
+import cartRouter from './dao/Routs/carts.js';
 //const { Server } = require('socket.io')
 import { Server } from 'socket.io'
 //const ProductManager = require('./productmanager')
@@ -18,6 +19,7 @@ import { Server } from 'socket.io'
 //const producto = new ProductManager()
 
 import { engine }  from "express-handlebars";
+import routerCarts from './Routs/carts.js';
 
 const publics = path.join(__dirname, './public');
 
@@ -30,6 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true } )) 
 
 app.use('/', productRouter)
+app.use('/', cartRouter)
 //app.use('/api/carts', routerCarts)
 //app.use ('/realtimeproducts', routerRealTimeProducts )
 //app.use(express.static(__dirname + '/Public'))

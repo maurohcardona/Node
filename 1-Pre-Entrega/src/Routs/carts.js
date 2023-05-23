@@ -1,10 +1,10 @@
 //const express = require('express');
 import express from 'express';
 //const CartManager = require('../cartManager')
-import CartManager from '../cartManager';
+import CartManager from '../cartManager.js';
 const cart = new CartManager()
 //const ProductManager = require('../productmanager')
-import ProductManager from '../productmanager';
+import ProductManager from '../productmanager.js';
 const producto = new ProductManager()
 
 const routerCarts = express.Router()

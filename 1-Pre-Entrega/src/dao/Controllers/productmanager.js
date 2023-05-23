@@ -1,5 +1,4 @@
 import productModel from '../models/products.js';
-
 class productManager {
     constructor() {
 
