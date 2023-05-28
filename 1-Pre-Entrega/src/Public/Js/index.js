@@ -22,7 +22,6 @@ form.addEventListener('submit', (e) => {
 
 
 socket.on('messages', (data) => {
-    console.log(data)
     let logs = ''
     data.forEach(e => {
     logs += `${e.user} dice: ${e.message}<br/>`})
