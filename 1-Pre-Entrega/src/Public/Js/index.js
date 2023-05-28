@@ -1,84 +1,44 @@
 const socket = io()
 
-
 const form = document.getElementById('form')
-const title = document.getElementById('Title')
-const description = document.getElementById('Description')
-const price = document.getElementById('Price')
-const thumbnail = document.getElementById('Thumbnail')
-const code = document.getElementById('Code')
-const stock = document.getElementById('Stock')
-const category = document.getElementById('Category')
+const user = document.getElementById('user')
+const message = document.getElementById('message')
+const log = document.getElementById('log')
 
-const deleteForm = document.getElementById('deleteform')
-const id = document.getElementById('id')
-
-function blankvalues(){
-    title.value = '',
-    description.value = '',
-    price.value = '',
-    thumbnail.value = '',
-    code.value = '',
-    stock.value = '',
-    category.value = '',
-    id.value = ''
+function clearform(){
+    user.value = '',
+    message.value = ''
 }
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    
-    
-    socket.emit('newProduct',{
-        Title: title.value,
-        Description: description.value,
-        Price: price.value,
-        Thumbnail: thumbnail.value,
-        Code: code.value,
-        Stock: stock.value,
-        Category: category.value,
-    })
-    blankvalues()
 
-
-        socket.on('sendProducts',async data => {
-        let productos = document.getElementById('hh')
-        let products = ''
-        //console.log(data)
-        await data.forEach(element => {
-            products = products + `
-            <div class="card">
-            <h3>${element.title}</h3>
-            <p>${element.description}<p>
-            <p>Price: $${element.price}<p>
-            <p>Stock: ${element.stock}<p>
-            </div>`
-        });
-        productos.innerHTML = products
-        
+    socket.emit('message', {
+      user: user.value,
+      message: message.value  
     })
+    clearform()
 })
-    
 
 
-deleteForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-
-    socket.emit('deleteProduct', parseInt(id.value))
-
-    socket.on('senddelete', data => {
-        let productos = document.getElementById('hh')
-        let products = ''
-        data.forEach(element => {
-            products = products + `
-            <div class="card">
-            <h3>${element.title}</h3>
-            <p>${element.description}<p>
-            <p>Price: $${element.price}<p>
-            <p>Stock: $${element.stock}<p>
-            </div>`
-        });
-        productos.innerHTML = products
-        blankvalues()
-    })
+socket.on('messages', (data) => {
+    console.log(data)
+    let logs = ''
+    data.forEach(e => {
+    logs += `${e.user} dice: ${e.message}<br/>`})
+    log.innerHTML=logs;
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 

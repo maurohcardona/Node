@@ -22,8 +22,8 @@ import messageRouter from './dao/Routs/messages.js';
 
 const PORT = 8080
 
-const publics = path.join(__dirname, './public');
-
+const publics = path.join(__dirname, 'Public');
+console.log(publics)
 app.engine('handlebars', engine())
 app.set('views', __dirname + '/Views')
 app.set('view engine', 'handlebars')
@@ -55,6 +55,7 @@ io.on('connection', socket => {
         const MessageManager  = new messageManager();
         await MessageManager.createMessage(data);
         const mensajes = await MessageManager.getMessage()
+        console.log(mensajes)
         io.emit('messages', mensajes);
     })
 
