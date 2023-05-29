@@ -1,10 +1,12 @@
 import  express  from "express";
+import { uploader } from "../../utils.js";
 const productRouter = express.Router();
 
 import productManager from "../Controllers/productmanager.js";
 
-productRouter.post('/products',async (req, res) => {
-    const {Title, Description, Price, Stock, Thumbnail,Code, Category} = req.body;
+productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) => {
+    const {Title, Description, Price, Stock, Code, Category} = req.body;
+    const filename = req.file.filename;
     if((!Stock )) {
         res.status(500).send('Falta completar el stock')
     }else if(!Title){
@@ -18,7 +20,7 @@ productRouter.post('/products',async (req, res) => {
     }else if(!Category){
         res.status(500).send('Falta completar la categoria')
     }else {
-        const newProduct = {Title, Description, Price, Stock, Thumbnail, Category}
+        const newProduct = {Title, Description, Price, Stock, Thumbnail: filename, Category}
         const ProductManager = new productManager();
         await ProductManager.createProduct(newProduct);
         const products = await ProductManager.getProduct()
