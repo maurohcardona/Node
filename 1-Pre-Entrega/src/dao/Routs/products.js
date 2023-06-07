@@ -30,9 +30,25 @@ productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) =
 
 productRouter.get('/products',async(req, res) => {
     try{
+        const limit = req.query.limit
+        const page = req.query.page
+        const category = req.query.category
+        const sort = req.query.sort
         const ProductManager = new productManager();
-        const products = await ProductManager.getProduct();
-        res.status(200).render('realTimeProducts', {products: products})
+        const products = await ProductManager.getProduct(limit, page, category, sort);
+        const newProducts = products.docs.map(data => {
+            //console.log(data._id)
+            return {
+                Title: data.Title,
+                Description: data.Description,
+                Price: data.Price,
+                Stock: data.Stock,
+                Category: data.Category,
+                Thumbnail: data.Thumbnail,
+                id:data._id
+            }
+        })
+        res.status(200).render('realTimeProducts', {products: newProducts})
     } catch(error){
         console.error('Error al obtener los productos:', error);
     }

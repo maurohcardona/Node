@@ -4,14 +4,15 @@ import db from "./db.js";
 const collection = 'carts'
 
 const schema = new mongoose.Schema({
-    Carts: {
+    Cart: {
 
         type: [
             {
-                Carts: {
+                cart: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "products"
-                }
+                },
+                quantity: {type: Number, default: 1},
             }
         ],
 

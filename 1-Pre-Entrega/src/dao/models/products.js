@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import db from './db.js';
-
+import mongoosepaginate from "mongoose-paginate-v2";
 
 const collection = 'products';
 
@@ -51,8 +51,7 @@ schema.statics.createProduct = async function (product) {
 };
 
 
-
-
+schema.plugin(mongoosepaginate)
 const productModel = db.model(collection, schema);
 
 export default productModel;

@@ -9,6 +9,9 @@
             <p>{{Description}}</p>
             <p>Price: ${{Price}}</p>
             <p>Stock: {{Stock}}</p>
+            <p>Category: {{Category}}</p>
+            <img src="/uploads/{{Thumbnail}}" alt="Imagen de Usuario" width="50">
+            <button>Add to cart</button>
         </div>
 
         {{/each}}
@@ -16,7 +19,7 @@
         
     </aside>
     <div class="forms">
-        <form action="/products" method="POST" class="form1">
+        <form action="/products" method="POST" class="form1" enctype="multipart/form-data">
             <h2>Ingresar productos</h2>
             <div>
                 <label for="Title">Title</label>
@@ -35,8 +38,8 @@
                 <input type="number" name="Stock" id="Stock" >
             </div>
             <div>
-                <label for="Thumbnail">thumbnail</label>
-                <input type="text" name="Thumbnail" id="Thumbnail" >
+                <label for="Thumbnail">Foto</label>
+                <input type="file" name="Thumbnail" id="Thumbnail" >
             </div>
             <div>
                 <label for="Code">Code</label>
