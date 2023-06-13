@@ -37,7 +37,6 @@ productRouter.get('/products',async(req, res) => {
         const ProductManager = new productManager();
         const products = await ProductManager.getProduct(limit, page, category, sort);
         const newProducts = products.docs.map(data => {
-            //console.log(data._id)
             return {
                 Title: data.Title,
                 Description: data.Description,
@@ -48,7 +47,9 @@ productRouter.get('/products',async(req, res) => {
                 id:data._id
             }
         })
-        res.status(200).render('realTimeProducts', {products: newProducts})
+        const { firstname, lastname, email, age } = req.session.user;
+        const rol = req.session.admin
+        res.status(200).render('realTimeProducts', {products: newProducts, firstname, lastname, email, age, rol})
     } catch(error){
         console.error('Error al obtener los productos:', error);
     }
