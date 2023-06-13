@@ -1,5 +1,5 @@
 import cartModel from "../models/carts.js";
-import productModel from "../models/products.js";
+
 
 class cartManager {
     constructor(){
@@ -31,9 +31,7 @@ class cartManager {
     async addCartByPoductId(cid, pid) {
         try{
             const cart = await cartModel.find({_id: cid});
-            console.log(cart)
             cart[0].Cart.push({cart: pid});      
-            console.log(cart[0].Cart)
             await cartModel.updateOne({_id: cid}, cart[0]); 
         } catch (err) {
             console.log('Error agregar al carrito', err)

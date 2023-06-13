@@ -14,16 +14,7 @@ const schema = new mongoose.Schema({
     }
 })
 
-schema.statics.createMessage = async function(messages) {
-    try {
-        const newMessage = new this(messages);
-        const result = await newMessage.save();
-        return result;
-    } catch (err) {
-        console.error('No se puede mandar el mensaje',err);
-        throw err;
-    }
-}
+
 
 const messageModel = db.model(collection, schema);
 

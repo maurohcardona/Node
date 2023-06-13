@@ -5,9 +5,17 @@ import __dirname from './utils.js';
 import productRouter from './dao/Routs/products.js';
 import cartRouter from './dao/Routs/carts.js';
 import messageManager from './dao/Controllers/messagemanager.js';
+import userRouter from './dao/Routs/users.js';
 import { Server } from 'socket.io'
 import { engine }  from "express-handlebars";
 import messageRouter from './dao/Routs/messages.js';
+import MongoStore from 'connect-mongo';
+import session from 'express-session';
+import cookieParser from "cookie-parser";import dotenv from 'dotenv';
+dotenv.config();
+
+const dbPassword = process.env.DB_PASSWORD;
+
 
 //Esto va con filesystem
 //import routerRealTimeProducts from './Routs/realTimeProducts.js'
@@ -31,10 +39,23 @@ app.set('view engine', 'handlebars')
 app.use(express.static(publics));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true } )) 
+app.use(cookieParser());
+app.use(session({
+    store:MongoStore.create({
+        mongoUrl:`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`, 
+        mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true}
+    }),
+    secret:'maurosecret',
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.use('/', productRouter)
 app.use('/', cartRouter)
 app.use('/', messageRouter);
+app.use('/', userRouter);
+
+
 
 
 app.get('/api/', (req, res) => {
@@ -60,4 +81,7 @@ io.on('connection', socket => {
 
     
 })
+
+
+
 

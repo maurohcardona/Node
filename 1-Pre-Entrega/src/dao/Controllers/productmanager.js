@@ -17,12 +17,10 @@ class productManager {
             const products = await productModel.paginate(filter,{page: page, limit: limit, sort:SORT});
             products.payload = 'productsado de los productos solicitados'
             products.status = 'Ok';
-            products.prevLink = products.hasPrevPage?`http://localhost:8080/products?page=${products.prevPage}`:'';
-            products.nextLink = products.hasNextPage?`http://localhost:8080/products?page=${products.nextPage}`:'';
+            products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=2&page=${products.prevPage}`:'';
+            products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=2&page=${products.nextPage}`:'';
             const detalles = {...products}
             delete detalles.docs
-            console.log(detalles);
-            //const products = await productModel.find({}).lean();
             return products
         } catch (err) {
             console.log('Error al obtener los productos', err)

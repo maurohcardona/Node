@@ -1,6 +1,6 @@
 import  express  from 'express'
 //const ProductManager = require('../productmanager')
-import ProductManager from '../productmanager'
+import ProductManager from '../../productmanager'
 const producto = new ProductManager()
 
 const routerRealTimeProducts = express.Router()

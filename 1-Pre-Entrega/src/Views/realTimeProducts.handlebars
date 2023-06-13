@@ -1,3 +1,27 @@
+<header>
+    <h2>Bienvenid@ {{firstname}} </h2>
+    <aside>
+        <div class="datos">
+            <h3>Datos del usuario</h3>
+            <p>Nombre:{{firstname}} </p>
+            <p>Apellido:{{lastname}} </p>
+            <p>email:{{email}} </p>
+            <p>Edad: {{age}}</p>
+            {{#if rol}}
+                <p>Rol:admin</p>
+            {{else}}
+                <p>Rol: user</p>
+            {{/if}}
+        </div>
+        <a href="/logout">
+        <button>Cerrar sesion</button>
+        </a>
+    </aside>
+    
+</header>
+
+
+
 <div class="container">
     <aside class="items">
         <h1>Todos los productosss</h1>
@@ -54,4 +78,15 @@
         
     </div>
 </div>
+
+<footer>
+    <p>total de productos: {{totalDocs}}</p>
+    <p>pagina: {{page}}</p>
+    {{#if prevLink}}
+        <a href={{prevLink}}>pagina anterior</a>
+    {{/if}}
+    {{#if nextLink}}
+        <a href={{nextLink}}>Siguiente pagina</a>
+    {{/if}}
+</footer>
 

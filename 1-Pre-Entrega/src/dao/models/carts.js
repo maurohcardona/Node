@@ -20,16 +20,6 @@ const schema = new mongoose.Schema({
     }
 });
 
-schema.statics.getCarts = async function(carts) {
-    try {
-        const newCart = new this(carts);
-        const result = await newCart.save();
-        return result;
-    } catch (err) {
-        console.error('No se puede mostrar los carritos',err);
-        throw err;
-    }
-}
 
 const cartModel = db.model(collection, schema);
 

@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
-mongoose.connect(`mongodb+srv://maurohcardona:estufa10@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`,{
+const dbPassword = process.env.DB_PASSWORD;
+
+mongoose.connect(`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`,{
     dbName: 'ecommerce', 
   });
 

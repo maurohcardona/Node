@@ -31,11 +31,11 @@ productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) =
 productRouter.get('/products',async(req, res) => {
     try{
         const limit = req.query.limit
-        const page = req.query.page
+        const pages = req.query.page
         const category = req.query.category
         const sort = req.query.sort
         const ProductManager = new productManager();
-        const products = await ProductManager.getProduct(limit, page, category, sort);
+        const products = await ProductManager.getProduct(limit, pages, category, sort);
         const newProducts = products.docs.map(data => {
             return {
                 Title: data.Title,
@@ -49,7 +49,9 @@ productRouter.get('/products',async(req, res) => {
         })
         const { firstname, lastname, email, age } = req.session.user;
         const rol = req.session.admin
-        res.status(200).render('realTimeProducts', {products: newProducts, firstname, lastname, email, age, rol})
+        console.log(products);
+        const {prevLink, nextLink, totalDocs, page} = products
+        res.status(200).render('realTimeProducts', {products: newProducts, firstname, lastname, email, age, rol, page, totalDocs, prevLink, nextLink})
     } catch(error){
         console.error('Error al obtener los productos:', error);
     }
