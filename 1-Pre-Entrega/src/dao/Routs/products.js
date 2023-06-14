@@ -49,7 +49,6 @@ productRouter.get('/products',async(req, res) => {
         })
         const { firstname, lastname, email, age } = req.session.user;
         const rol = req.session.admin
-        console.log(products);
         const {prevLink, nextLink, totalDocs, page} = products
         res.status(200).render('realTimeProducts', {products: newProducts, firstname, lastname, email, age, rol, page, totalDocs, prevLink, nextLink})
     } catch(error){
