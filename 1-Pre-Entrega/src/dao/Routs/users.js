@@ -2,6 +2,7 @@ import  express  from "express";
 import userModel from "../models/users.js";
 import { createHash }  from "../../utils.js";
 import { isValidPassword } from "../../utils.js";
+import passport from "passport";
 
 const userRouter = express.Router();
 
@@ -10,23 +11,15 @@ userRouter.get('/register', (req, res) => {
     res.render('register');
 })
 
-userRouter.post('/register', async (req,res)=>{
-    const { firstname, lastname, email, age, password } = req.body;
-    
-    const userEx = await userModel.findOne({email});
-    if( userEx ) {
-        console.error('Error, el usuario ya esta registrado');
-        res.redirect('/login');
-    }
-    try {
-        const user = new userModel({ firstname, lastname, email, age, password:createHash(password) });
-        await user.save();
-        res.redirect('/login');
-    } catch (error) {   
-        console.error('Error al registrar el usuario:', error);
-        res.redirect('/register');
-    }
+userRouter.post('/register', passport.authenticate('register', {failureRedirect:'/failregister'}), async (req, res) => {
+    res.redirect('/login')
 })
+
+userRouter.get('/failregister', async (req, res) => {
+    console.log('Failed strategy');
+    res.send({error: 'failed'});
+});
+
 
 userRouter.get('/login', async (req, res) => {
     res.render('login')

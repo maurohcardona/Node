@@ -11,6 +11,8 @@ import { engine }  from "express-handlebars";
 import messageRouter from './dao/Routs/messages.js';
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
+import passport from 'passport';
+import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";import dotenv from 'dotenv';
 dotenv.config();
 
@@ -49,6 +51,10 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', productRouter)
 app.use('/', cartRouter)
