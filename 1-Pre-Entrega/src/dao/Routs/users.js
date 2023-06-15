@@ -25,35 +25,28 @@ userRouter.get('/login', async (req, res) => {
     res.render('login')
 })
 
-userRouter.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    console.log(req.body);
-    try {
-        const user = await userModel.findOne({ email });
-        if (!user) {
-            res.redirect('/login');
-            console.log('el usuario no existe')
-        
-        } else if (email === 'adminCoder@coder.com'){
-            if (!isValidPassword(user, password))
-                return res.status(403).send({status: 'error', error:'Incorrect password'})
-            delete user.password
-            req.session.user = user;
-            req.session.admin = true
-            res.redirect('/products?limit=2');
-        } else {
-            if (!isValidPassword(user, password))
-                return res.status(403).send({status: 'error', error:'Incorrect password'})
-            delete user.password
-            req.session.user = user;
-            req.session.admin = false;
-            res.redirect('/products?limit=2');
+userRouter.post('/login', passport.authenticate('login', {failureRedirect:'/faillogin'}), async (req, res) => {
+    if (!req.user) return res.status(400).send({status:'error', error:'invalid credentials'});
+    req.session.user = {
+        firstname: req.user.firstname,
+        lastname: req.user.lastname,
+        age: req.user.age,
+        email: req.user.email
         }
-    } catch (error) {
-        console.error('Error al iniciar sesión:', error);
-        res.redirect('/login');
-    }
+    if (req.user.email === 'adminCoder@coder.com'){
+        req.session.admin = true
+        res.redirect('/products?limit=2');
+    } else {
+        req.session.admin = false
+        res.redirect('/products?limit=2');  
+    } 
 });
+
+userRouter.get('/faillogin', (req, res) =>{
+    res.send({error:"failed login"})
+})
+
+
 
 userRouter.get('/logout', (req, res) => {
     req.session.destroy();

@@ -30,6 +30,21 @@ const initializePassport = () => {
             }
         }
     ))
+
+    passport.use('login', new localStrategy({usernameField: 'email'}, async (username, password, done) => {
+        try {
+            const user = await userModel.findOne({ email: username });
+            if (!user) {
+                console.log('User not found');
+                return done(null, false);
+            }
+            if (!isValidPassword(user, password)) return done(null, false);
+            delete user.password
+            return done(null, user);
+        } catch (err) {
+            return done(err.message, err);
+        }
+    }))
 };
 
 passport.serializeUser((user, done) => {
