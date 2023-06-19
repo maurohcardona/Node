@@ -2,18 +2,19 @@ import  express  from 'express';
 const app = express();
 import path from 'path';
 import __dirname from './utils.js';
-import productRouter from './dao/Routs/products.js';
-import cartRouter from './dao/Routs/carts.js';
+import productRouter from './Routs/products.js';
+import cartRouter from './Routs/carts.js';
 import messageManager from './dao/Controllers/messagemanager.js';
-import userRouter from './dao/Routs/users.js';
+import userRouter from './Routs/users.js';
 import { Server } from 'socket.io'
 import { engine }  from "express-handlebars";
-import messageRouter from './dao/Routs/messages.js';
+import messageRouter from './Routs/messages.js';
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
-import cookieParser from "cookie-parser";import dotenv from 'dotenv';
+import cookieParser from "cookie-parser";
+import dotenv from 'dotenv';
 dotenv.config();
 
 const dbPassword = process.env.DB_PASSWORD;
@@ -60,6 +61,7 @@ app.use('/', productRouter)
 app.use('/', cartRouter)
 app.use('/', messageRouter);
 app.use('/', userRouter);
+
 
 
 

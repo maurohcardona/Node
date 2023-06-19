@@ -1,8 +1,8 @@
 import  express  from "express";
-import { uploader } from "../../utils.js";
+import { uploader } from "../utils.js";
 const productRouter = express.Router();
 
-import productManager from "../Controllers/productmanager.js";
+import productManager from '../dao/Controllers/productmanager.js';
 
 productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) => {
     const {Title, Description, Price, Stock, Code, Category} = req.body;
