@@ -4,6 +4,7 @@ import userModel from "../dao/models/users.js";
 import { isValidPassword, createHash } from "../utils.js";
 import GitHubStrategy from "passport-github2"
 import dotenv from 'dotenv';
+import cartManager from "../dao/Controllers/cartmanager.js";
 
 dotenv.config();
 
@@ -22,14 +23,17 @@ const initializePassport = () => {
                 let user =  await userModel.findOne({ email: username });
                 if (user) {
                     console.log('User already registered')
-                    return done(null, false);
-                } 
+                    return done(null, false, req.flash('success', 'User already registered'));
+                }
+                const CartManager = new cartManager();
+                const cart = await CartManager.createCart(); 
                 const newUser = {
                     firstname,
                     lastname,
                     email,
                     age,
-                    password: createHash(password)
+                    password: createHash(password),
+                    cart: cart._id
                 }
                 let result = await userModel.create(newUser);
                 return done(null, result);
@@ -39,17 +43,19 @@ const initializePassport = () => {
         }
     ))
 
-    passport.use('login', new localStrategy({usernameField: 'email'}, async (username, password, done) => {
+    passport.use('login', new localStrategy(
+        {passReqToCallback:true, usernameField: 'email'}, async(req, username, password, done) => {
         try {
             const user = await userModel.findOne({ email: username });
             if (!user) {
                 console.log('User not found');
-                return done(null, false);
+                return done(null, false, req.flash('errorlogin', 'User not found'));
             }
-            if (!isValidPassword(user, password)) return done(null, false);
+            if (!isValidPassword(user, password)) return done(null, false, req.flash('errorlogin', 'Invalid password'));
             delete user.password
             return done(null, user);
         } catch (err) {
+            console.log(err);
             return done(err.message, err);
         }
     }))
@@ -62,10 +68,11 @@ const initializePassport = () => {
         try {
             let user = await userModel.findOne({email: profile._json.email});
             if (!user) {
+                const email =profile._json.email? profile._json.email: 'Not mail'; 
                 let newUser = {
                     firstname: profile._json.name,
                     lastname: '',
-                    email: profile._json.email,
+                    email,
                     age:'',
                     password: ''
                 }

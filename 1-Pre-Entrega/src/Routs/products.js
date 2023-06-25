@@ -1,5 +1,7 @@
 import  express  from "express";
 import { uploader } from "../utils.js";
+import { isAuthenticated } from "./users.js";
+
 const productRouter = express.Router();
 
 import productManager from '../dao/Controllers/productmanager.js';
@@ -28,7 +30,7 @@ productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) =
     }
 })
 
-productRouter.get('/products',async(req, res) => {
+productRouter.get('/products',isAuthenticated, async(req, res) => {
     try{
         const limit = req.query.limit
         const pages = req.query.page

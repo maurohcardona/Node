@@ -17,8 +17,8 @@ class productManager {
             const products = await productModel.paginate(filter,{page: page, limit: limit, sort:SORT});
             products.payload = 'productsado de los productos solicitados'
             products.status = 'Ok';
-            products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=2&page=${products.prevPage}`:'';
-            products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=2&page=${products.nextPage}`:'';
+            products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=6&page=${products.prevPage}`:'';
+            products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=6&page=${products.nextPage}`:'';
             const detalles = {...products}
             delete detalles.docs
             return products

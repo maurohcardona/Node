@@ -7,36 +7,27 @@ const collection = 'products';
 const schema = new mongoose.Schema({
     Title: {
         type: String,
-        
     },
     Description: {
-        type: String,
-        
+        type: String,  
     },
     Price: {
-        type: Number,
-        
+        type: Number, 
     },
-
     Thumbnail: {
-        type: String,
-        
+        type: String,   
     },
     Code: {
-        type: Number,
-        
+        type: Number,   
     },
     Stock: {
-        type: Number,
-        
+        type: Number,   
     },
     Category: {
-        type: String,
-        
+        type: String,    
     }
 
 });
-
 
 
 schema.plugin(mongoosepaginate)

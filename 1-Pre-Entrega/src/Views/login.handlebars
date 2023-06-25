@@ -1,18 +1,24 @@
-<h1>Loguin</h1>
-<h3>ingrese sus datos para seguir navegando o cree una cuenta</h3>
-<div>
-    <form action="/login" method="post">
-        <input type="email" name="email" placeholder="Email"/>
-        <input type="password" name="password" placeholder="Password"/>
-        <button type="submit">Iniciar sesion</button>
-    </form>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="text-center">Login</h3>
+            </div>  
+            <div class="card-body">
+                <form action="/login" method="post">
+                    <div class="form-group mb-2">
+                        <input type="email" name="email" placeholder="Email" class="form-control"/>
+                    </div>
+                    <div class="form-group mb-1">
+                        <input type="password" name="password" placeholder="Password" class="form-control"/>
+                    </div>
+                    {{#if errorlogin}}
+                    <span class="alert">{{errorlogin}}</span>
+                    {{/if}}
+                    <button class="btn btn-primary btn-block mt-2" type="submit">Iniciar sesion</button>
+                </form>
+                <a href="/api/sessions/github"><button class="btn btn-primary btn-block mt-2">Entrar con Gitgub</button></a>
+            </div>
+        </div>
+    </div>
 </div>
-<br>
-<div>
-    <a href="/api/sessions/github"><button>Entrar con Gitgub</button></a>
-</div>
-<br><br>
-<a href="/register">
-        <button>Cree una cuenta</button>
-    </a>
-

@@ -1,0 +1,14 @@
+    <div class="card"    style="width: 18rem;">
+        <div class="card-body">
+            <h3 class="card-title">Datos del usuario</h3>
+            <p class="card-text" >Nombre: {{firstname}} </p>
+            <p class="card-text" >Apellido: {{lastname}} </p>
+            <p class="card-text" >email: {{email}} </p>
+            <p class="card-text" >Edad: {{age}}</p>
+            {{#if rol}}
+                <p class="card-text" >Rol:admin</p>
+            {{else}}
+                <p class="card-text" >Rol: user</p>
+            {{/if}}
+        </div>
+    </div>

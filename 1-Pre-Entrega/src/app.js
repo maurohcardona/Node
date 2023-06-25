@@ -15,6 +15,7 @@ import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
+import flash from 'connect-flash';
 dotenv.config();
 
 const dbPassword = process.env.DB_PASSWORD;
@@ -52,10 +53,15 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
-
+app.use(flash());
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+    app.locals.user = req.user;
+    app.locals.errorlogin = req.flash('errorlogin');
+    next(); 
+})
 
 app.use('/', productRouter)
 app.use('/', cartRouter)
