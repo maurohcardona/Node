@@ -20,9 +20,10 @@ class cartManager {
         }
     }
 
-    async getCartsById(cid, pid) {
+    async getCartsById(cid) {
         try{
-            await cartModel.updateOne({_id: cid}, {$pull: { Cart: { cart: pid } }})
+            const cart = await cartModel.findById(cid)
+            return cart
         } catch (err) {
             console.log('Error al obtener el carrito', err)
         }
@@ -40,6 +41,13 @@ class cartManager {
 
     async addOnlyCuontity (cid, pid, quantity) {
         try{
+            if (quantity === undefined) {
+                const cart = await cartModel.findById(cid);
+                const product = cart.Cart.find(p => p.cart.toString() === pid);
+                if (product) {
+                    quantity = product.quantity + 1;
+                }
+            }
             await cartModel.findOneAndUpdate(
                 {_id: cid, 'Cart.cart':pid},
                 { $set: { 'Cart.$.quantity': quantity } },
@@ -64,8 +72,8 @@ class cartManager {
 
     async getCompleteCart (cid) {
         try{
-            const cart = await cartModel.find({_id: cid}).populate('Cart.cart')
-            return cart
+            const cart = await cartModel.findById(cid).populate('Cart.cart')
+            return cart.Cart
         } catch (err) {
             console.log('Error al mostrar el carrito', err)
         }

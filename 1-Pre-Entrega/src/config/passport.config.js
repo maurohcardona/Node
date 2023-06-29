@@ -68,14 +68,17 @@ const initializePassport = () => {
         try {
             let user = await userModel.findOne({email: profile._json.email});
             if (!user) {
+                const CartManager = new cartManager();
+                const cart = await CartManager.createCart();
                 const email =profile._json.email? profile._json.email: 'Not mail'; 
                 let newUser = {
                     firstname: profile._json.name,
                     lastname: '',
                     email,
                     age:'',
-                    password: ''
-                }
+                    password: '',
+                    cart: cart._id
+                }   
                 let result = await userModel.create(newUser);
                 done(null, result);
             } else {

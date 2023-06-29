@@ -38,6 +38,7 @@ productRouter.get('/products',isAuthenticated, async(req, res) => {
         const sort = req.query.sort
         const ProductManager = new productManager();
         const products = await ProductManager.getProduct(limit, pages, category, sort);
+        const cid = req.user.cart;
         const newProducts = products.docs.map(data => {
             return {
                 Title: data.Title,
@@ -46,7 +47,8 @@ productRouter.get('/products',isAuthenticated, async(req, res) => {
                 Stock: data.Stock,
                 Category: data.Category,
                 Thumbnail: data.Thumbnail,
-                id:data._id
+                id:data._id,
+                cid,
             }
         })
         const { firstname, lastname, email, age } = req.session.user;

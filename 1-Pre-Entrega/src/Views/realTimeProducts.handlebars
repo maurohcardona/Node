@@ -9,14 +9,31 @@
                 <p class="card-text">{{Description}}</p>
                 <p class="card-text">Price: {{Price}}</p>
                 <p class="card-text">{{Category}}</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <a class="btn btn-primary add-to-cart-btn" href="/carts/{{cid}}/products/{{id}}" >Add to cart</a>
             </div>
         </div>
         {{/each}}
     </div>
         
 </div>
-    {{!-- <div class="forms">
+    
+</div>
+
+<footer class="d-flex flex-column justify-content-center align-items-center">
+    <p>total de productos: {{totalDocs}}</p>
+    <p>pagina: {{page}}</p>
+    <div class="d-flex justify-content-between">
+        {{#if prevLink}}
+            <a href={{prevLink}}>&lt; &lt; Pagina anterior</a>
+        {{/if}}
+        {{#if nextLink}}
+            <a href={{nextLink}}>Siguiente pagina &gt; &gt;</a>
+        {{/if}}
+    </div>
+</footer>
+{{!-- <script type="module" src="/Js/realtime.js"></script> --}}
+
+{{!-- <div class="forms">
         <form action="/products" method="POST" class="form1" enctype="multipart/form-data">
             <h2>Ingresar productos</h2>
             <div>
@@ -51,18 +68,3 @@
         </form>
         
     </div> --}}
-</div>
-
-<footer class="d-flex flex-column justify-content-center align-items-center">
-    <p>total de productos: {{totalDocs}}</p>
-    <p>pagina: {{page}}</p>
-    <div class="d-flex justify-content-between">
-        {{#if prevLink}}
-            <a href={{prevLink}}>&lt; &lt; Pagina anterior</a>
-        {{/if}}
-        {{#if nextLink}}
-            <a href={{nextLink}}>Siguiente pagina &gt; &gt;</a>
-        {{/if}}
-    </div>
-</footer>
-

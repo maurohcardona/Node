@@ -11,7 +11,7 @@ userRouter.get('/register', (req, res) => {
     res.render('register');
 })
 
-userRouter.get('/profile', isAuthenticated,(req, res) => {
+userRouter.get('/current', isAuthenticated,(req, res) => {
     res.render('profile', req.session.user);
 })
 
@@ -35,7 +35,8 @@ userRouter.post('/login', passport.authenticate('login', {failureRedirect:'/logi
         firstname: req.user.firstname,
         lastname: req.user.lastname,
         age: req.user.age,
-        email: req.user.email
+        email: req.user.email,
+        cart: req.session.cart
         }
     if (req.user.email === 'adminCoder@coder.com'){
         req.session.admin = true

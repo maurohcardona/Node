@@ -36,6 +36,7 @@ const PORT = 8080
 
 const publics = path.join(__dirname, 'Public');
 
+
 app.engine('handlebars', engine())
 app.set('views', __dirname + '/Views')
 app.set('view engine', 'handlebars')
@@ -58,7 +59,14 @@ initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-    app.locals.user = req.user;
+    if (req.user) {
+        req.user = {
+          ...req.user,
+          cart: req.user.cart
+        };
+        app.locals.cart= req.user.cart;
+    }
+    app.locals.user = req.user;  
     app.locals.errorlogin = req.flash('errorlogin');
     next(); 
 })
@@ -67,9 +75,6 @@ app.use('/', productRouter)
 app.use('/', cartRouter)
 app.use('/', messageRouter);
 app.use('/', userRouter);
-
-
-
 
 
 app.get('/api/', (req, res) => {
