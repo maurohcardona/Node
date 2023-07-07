@@ -77,10 +77,6 @@ app.use('/', messageRouter);
 app.use('/', userRouter);
 
 
-app.get('/api/', (req, res) => {
-    res.send('Node curse');
-})
-
 const httpServer = app.listen(PORT, () =>{
     console.log(`listening on port ${PORT}`);
 })
