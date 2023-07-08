@@ -19,18 +19,6 @@ const app = express();
 
 const dbPassword = process.env.DB_PASSWORD;
 
-
-//Esto va con filesystem
-//import routerRealTimeProducts from './Routs/realTimeProducts.js'
-//import routerCarts from './Routs/carts.js';
-//import ProductManager from './productmanager.js';
-//const producto = new ProductManager()
-//import routerCarts from './Routs/carts.js';
-//app.use('/api/carts', routerCarts)
-//app.use ('/realtimeproducts', routerRealTimeProducts )
-//app.use(express.static(__dirname + '/Public'))
-
-
 const PORT = 8080
 
 const publics = path.join(__dirname, 'Public');
