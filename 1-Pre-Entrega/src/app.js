@@ -12,7 +12,7 @@ import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
-import  Jwt  from 'jsonwebtoken';
+import Jwt from 'jsonwebtoken';
 dotenv.config();
 
 const app = express();
@@ -44,15 +44,7 @@ app.use(express.static(publics));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true } )) 
 app.use(cookieParser());
-// app.use(session({
-//     store:MongoStore.create({
-//         mongoUrl:`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`, 
-//         mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true}
-//     }),
-//     secret:'maurosecret',
-//     resave: true,
-//     saveUninitialized: true
-// }))
+
 
 initializePassport();
 app.use(passport.initialize());
