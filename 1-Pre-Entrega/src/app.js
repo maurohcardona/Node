@@ -1,5 +1,4 @@
 import  express  from 'express';
-const app = express();
 import path from 'path';
 import __dirname from './utils.js';
 import productRouter from './Routs/products.js';
@@ -9,14 +8,14 @@ import userRouter from './Routs/users.js';
 import { Server } from 'socket.io'
 import { engine }  from "express-handlebars";
 import messageRouter from './Routs/messages.js';
-import MongoStore from 'connect-mongo';
-import session from 'express-session';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
-import flash from 'connect-flash';
+import  Jwt  from 'jsonwebtoken';
 dotenv.config();
+
+const app = express();
 
 const dbPassword = process.env.DB_PASSWORD;
 
@@ -45,30 +44,28 @@ app.use(express.static(publics));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true } )) 
 app.use(cookieParser());
-app.use(session({
-    store:MongoStore.create({
-        mongoUrl:`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`, 
-        mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true}
-    }),
-    secret:'maurosecret',
-    resave: true,
-    saveUninitialized: true
-}))
-app.use(flash());
+// app.use(session({
+//     store:MongoStore.create({
+//         mongoUrl:`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`, 
+//         mongoOptions:{useNewUrlParser:true, useUnifiedTopology:true}
+//     }),
+//     secret:'maurosecret',
+//     resave: true,
+//     saveUninitialized: true
+// }))
+
 initializePassport();
 app.use(passport.initialize());
-app.use(passport.session());
-app.use((req, res, next) => {
-    if (req.user) {
-        req.user = {
-          ...req.user,
-          cart: req.user.cart
-        };
-        app.locals.cart= req.user.cart;
+
+
+app.use ((req, res, next) => {
+    if (req.cookies && req.cookies.cookieToken) {
+        const cookieValue = req.cookies.cookieToken;
+        Jwt.verify(cookieValue, 'SecretCode', (error, credentials) => {
+            app.locals.cookieValue = credentials;   
+        })
     }
-    app.locals.user = req.user;  
-    app.locals.errorlogin = req.flash('errorlogin');
-    next(); 
+    next();  
 })
 
 app.use('/', productRouter)

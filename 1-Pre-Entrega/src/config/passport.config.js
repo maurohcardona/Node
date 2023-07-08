@@ -5,6 +5,9 @@ import { isValidPassword, createHash } from "../utils.js";
 import GitHubStrategy from "passport-github2"
 import dotenv from 'dotenv';
 import cartManager from "../dao/Controllers/cartmanager.js";
+import jwtp from 'passport-jwt';
+import jwt from 'jsonwebtoken';
+
 
 dotenv.config();
 
@@ -12,7 +15,18 @@ const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const callbackUrl = process.env.CALLBACK_URL;
 
+const JWTStrategy = jwtp.Strategy;
+const ExtractJWT = jwtp.ExtractJwt;
+
 const localStrategy = local.Strategy;
+
+const cookieExtractor = req => {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies['cookieToken'];
+    }
+    return token;
+}
 
 const initializePassport = () => {
     
@@ -60,7 +74,7 @@ const initializePassport = () => {
         }
     }))
 
-    passport.use('github', new GitHubStrategy ({
+    passport.use('github', new GitHubStrategy.Strategy ({
         clientID: clientId,
         clientSecret: clientSecret,
         callbackUrl: callbackUrl
@@ -80,12 +94,27 @@ const initializePassport = () => {
                     cart: cart._id
                 }   
                 let result = await userModel.create(newUser);
-                done(null, result);
+                const { firstname, lastname } = newUser;
+                const token = jwt.sign({firstname, lastname, email, cart, age}, 'SecretCode');
+                done(null, token);
             } else {
-                done(null, user);
+                const { firstname, lastname, email, cart, age } = user;
+                const token = jwt.sign({firstname, lastname, email, cart, age}, 'SecretCode');
+                done(null, token);
             }
         } catch (error) {
             done(error);
+        }
+    }))
+
+    passport.use('jwt', new JWTStrategy({
+        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
+        secretOrKey: 'SecretCode',
+    }, async (jwt_payload, done) => {
+        try{
+            return done(null, jwt_payload);
+        } catch (error) {
+            return done(error);
         }
     }
     ))

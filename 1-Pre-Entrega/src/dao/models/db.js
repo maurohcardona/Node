@@ -7,6 +7,7 @@ const dbPassword = process.env.DB_PASSWORD;
 mongoose.connect(`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`,{
     dbName: 'ecommerce', 
   });
+  
 
 
 
