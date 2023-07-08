@@ -1,4 +1,4 @@
-
+import "dotenv/config";
 
 let config = {};
 
@@ -7,5 +7,12 @@ config.server = {
 }
 
 config.db = {
-    dbconnection: 
+    dbconnection: process.env.DB
 }
+
+config.passport = {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackUrl: process.env.CALLBACK_URL
+}
+export default config;

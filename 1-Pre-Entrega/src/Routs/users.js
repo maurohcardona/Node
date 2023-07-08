@@ -90,8 +90,7 @@ userRouter.get('/logout', (req, res) => {
 
 userRouter.get('/api/auth/github/github', passport.authenticate('github', {scope:['user: email']}), async (req, res) =>{});
 
-userRouter.get('/api/auth/github/callback', passport.authenticate('github', {failureRedirect:'/login', session:false}), async (req, res) => {
-    console.log(req.user)   
+userRouter.get('/api/auth/github/callback', passport.authenticate('github', {failureRedirect:'/login', session:false}), async (req, res) => { 
     const token = req.user 
     res.cookie('cookieToken', token, { maxAge: 3600000, httpOnly: true });
     res.redirect('/products?limit=6');  

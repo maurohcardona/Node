@@ -3,17 +3,16 @@ import local from "passport-local";
 import userModel from "../dao/models/users.js";
 import { isValidPassword, createHash } from "../utils.js";
 import GitHubStrategy from "passport-github2"
-import dotenv from 'dotenv';
+import "dotenv/config";
+import config from "./config.js";
 import cartManager from "../dao/Controllers/cartmanager.js";
 import jwtp from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 
 
-dotenv.config();
-
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const callbackUrl = process.env.CALLBACK_URL;
+const clientId = config.passport.clientId;
+const clientSecret = config.passport.clientSecret;
+const callbackUrl = config.passport.callbackUrl;
 
 const JWTStrategy = jwtp.Strategy;
 const ExtractJWT = jwtp.ExtractJwt;

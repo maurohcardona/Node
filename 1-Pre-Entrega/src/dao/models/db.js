@@ -1,16 +1,14 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
+import config from '../../config/config.js';
 
-const dbPassword = process.env.DB_PASSWORD;
 
-mongoose.connect(`mongodb+srv://maurohcardona:${dbPassword}@mauroc.dilwd5c.mongodb.net/?retryWrites=true&w=majority`,{
+const mongodb = config.db.dbconnection;
+
+
+mongoose.connect(mongodb,{
     dbName: 'ecommerce', 
   });
   
-
-
-
 const db = mongoose.connection;
 
 
