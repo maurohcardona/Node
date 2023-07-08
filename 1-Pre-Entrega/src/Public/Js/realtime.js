@@ -1,5 +1,22 @@
+const buttonCart = document.getElementById('addToCart')
 
+// const addToCart = () => {
+//     alert('Producto agregado')
+// }
 
+async function addToCart() {
+    try {
+      const response = await fetch('http://localhost:8080/products/cc');
+      if (!response.ok) {
+        throw new Error('No se pudo obtener los datos');
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+buttonCart.addEventListener('click', addToCart)
 // const socket = io()
 
 

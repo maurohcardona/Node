@@ -37,23 +37,6 @@ userRouter.get('/login', async (req, res) => {
     res.render('login')
 })
 
-// userRouter.post('/login', passport.authenticate('login', {failureRedirect:'/login'}), async (req, res) => {
-//     if (!req.user) return res.status(400).send({status:'error', error:'invalid credentials'});
-//     req.session.user = {
-//         firstname: req.user.firstname,
-//         lastname: req.user.lastname,
-//         age: req.user.age,
-//         email: req.user.email,
-//         cart: req.session.cart
-//         }
-//     if (req.user.email === 'adminCoder@coder.com'){
-//         req.session.admin = true
-//         res.redirect('/products?limit=6');
-//     } else {
-//         req.session.admin = false
-//         res.redirect('/products?limit=6');  
-//     } 
-// });
 
 userRouter.post('/login', async (req, res) => {
     const { email, password } = req.body;

@@ -56,6 +56,39 @@ productRouter.get('/products',passportCall('jwt'), async(req, res) => {
         //const rol = req.session.admin
         const {prevLink, nextLink, totalDocs, page} = products
         res.status(200).render('realTimeProducts', {products: newProducts, page, totalDocs, prevLink, nextLink})
+        //res.status(200).send({products: newProducts, page, totalDocs, prevLink, nextLink})
+    } catch(error){
+        console.error('Error al obtener los productos:', error);
+    }
+    
+})
+
+productRouter.get('/products/cc',passportCall('jwt'), async(req, res) => {
+    try{
+        const limit = req.query.limit
+        const pages = req.query.page
+        const category = req.query.category
+        const sort = req.query.sort
+        const ProductManager = new productManager();
+        const products = await ProductManager.getProduct(limit, pages, category, sort);
+        const cid = req.user.cart;
+        const newProducts = products.docs.map(data => {
+            return {
+                Title: data.Title,
+                Description: data.Description,
+                Price: data.Price,
+                Stock: data.Stock,
+                Category: data.Category,
+                Thumbnail: data.Thumbnail,
+                id:data._id,
+                cid,
+            }
+        })
+        //const { firstname, lastname, email, age } = req.session.user;
+        //const rol = req.session.admin
+        const {prevLink, nextLink, totalDocs, page} = products
+        //res.status(200).render('realTimeProducts', {products: newProducts, page, totalDocs, prevLink, nextLink})
+        res.status(200).send({products: newProducts})
     } catch(error){
         console.error('Error al obtener los productos:', error);
     }

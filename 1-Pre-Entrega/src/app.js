@@ -1,6 +1,5 @@
 import  express  from 'express';
-import path from 'path';
-import __dirname from './utils.js';
+import { __dirname, publics } from './utils.js';
 import productRouter from './Routs/products.js';
 import cartRouter from './Routs/carts.js';
 import messageManager from './dao/Controllers/messagemanager.js';
@@ -11,17 +10,14 @@ import messageRouter from './Routs/messages.js';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
-import dotenv from 'dotenv';
-import Jwt from 'jsonwebtoken';
-dotenv.config();
+import { credentials } from './middlewares/user.middleware.js';
+import config from './config/config.js';
 
 const app = express();
 
-const dbPassword = process.env.DB_PASSWORD;
 
-const PORT = 8080
+const port = config.server.port
 
-const publics = path.join(__dirname, 'Public');
 
 
 app.engine('handlebars', engine())
@@ -37,16 +33,8 @@ app.use(cookieParser());
 initializePassport();
 app.use(passport.initialize());
 
+app.use(credentials(app))
 
-app.use ((req, res, next) => {
-    if (req.cookies && req.cookies.cookieToken) {
-        const cookieValue = req.cookies.cookieToken;
-        Jwt.verify(cookieValue, 'SecretCode', (error, credentials) => {
-            app.locals.cookieValue = credentials;   
-        })
-    }
-    next();  
-})
 
 app.use('/', productRouter)
 app.use('/', cartRouter)
@@ -54,8 +42,8 @@ app.use('/', messageRouter);
 app.use('/', userRouter);
 
 
-const httpServer = app.listen(PORT, () =>{
-    console.log(`listening on port ${PORT}`);
+const httpServer = app.listen(port, () =>{
+    console.log(`listening on port ${port}`);
 })
 
 const io = new Server(httpServer)
