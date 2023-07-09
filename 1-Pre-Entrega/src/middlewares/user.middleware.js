@@ -5,9 +5,8 @@ import Jwt from 'jsonwebtoken';
 export const passportCall =  (strategy) => {
     return async(req, res, next) => {
         passport.authenticate(strategy, function(err, user, info){
-            if (err) return next(err)
             if (!user) {
-                return res.status(401).send({error:info.messages?info.messages: info.toString()})
+                res.redirect('/login');    
             }
             req.user = user
             next();

@@ -1,13 +1,11 @@
 import  express  from "express";
 import { uploader } from "../utils.js";
-import { isAuthenticated } from "./users.js";
 import { passportCall } from "../middlewares/user.middleware.js";
+import productManager from '../dao/Controllers/productmanager.js';
 
 const productRouter = express.Router();
 
-import productManager from '../dao/Controllers/productmanager.js';
-
-productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) => {
+productRouter.post('/', uploader.single('Thumbnail'), async (req, res) => {
     const {Title, Description, Price, Stock, Code, Category} = req.body;
     const filename = req.file.filename;
     if((!Stock )) {
@@ -31,7 +29,7 @@ productRouter.post('/products', uploader.single('Thumbnail'), async (req, res) =
     }
 })
 
-productRouter.get('/products',passportCall('jwt'), async(req, res) => {
+productRouter.get('/',passportCall('jwt', {failureRedirect:'/login'}), async(req, res) => {
     try{
         const limit = req.query.limit
         const pages = req.query.page
@@ -52,18 +50,14 @@ productRouter.get('/products',passportCall('jwt'), async(req, res) => {
                 cid,
             }
         })
-        //const { firstname, lastname, email, age } = req.session.user;
-        //const rol = req.session.admin
         const {prevLink, nextLink, totalDocs, page} = products
         res.status(200).render('realTimeProducts', {products: newProducts, page, totalDocs, prevLink, nextLink})
-        //res.status(200).send({products: newProducts, page, totalDocs, prevLink, nextLink})
     } catch(error){
         console.error('Error al obtener los productos:', error);
     }
-    
 })
 
-productRouter.get('/products/cc',passportCall('jwt'), async(req, res) => {
+productRouter.get('/cc',passportCall('jwt'), async(req, res) => {
     try{
         const limit = req.query.limit
         const pages = req.query.page
@@ -84,10 +78,7 @@ productRouter.get('/products/cc',passportCall('jwt'), async(req, res) => {
                 cid,
             }
         })
-        //const { firstname, lastname, email, age } = req.session.user;
-        //const rol = req.session.admin
         const {prevLink, nextLink, totalDocs, page} = products
-        //res.status(200).render('realTimeProducts', {products: newProducts, page, totalDocs, prevLink, nextLink})
         res.status(200).send({products: newProducts})
     } catch(error){
         console.error('Error al obtener los productos:', error);

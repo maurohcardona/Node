@@ -15,10 +15,7 @@ import config from './config/config.js';
 
 const app = express();
 
-
 const port = config.server.port
-
-
 
 app.engine('handlebars', engine())
 app.set('views', __dirname + '/Views')
@@ -36,7 +33,7 @@ app.use(passport.initialize());
 app.use(credentials(app))
 
 
-app.use('/', productRouter)
+app.use('/products', productRouter)
 app.use('/', cartRouter)
 app.use('/', messageRouter);
 app.use('/', userRouter);
@@ -57,9 +54,7 @@ io.on('connection', socket => {
         await MessageManager.createMessage(data);
         const mensajes = await MessageManager.getMessage()
         io.emit('messages', mensajes);
-    })
-
-    
+    })  
 })
 
 

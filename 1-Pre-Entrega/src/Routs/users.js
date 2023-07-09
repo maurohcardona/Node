@@ -19,7 +19,7 @@ userRouter.get('/register', (req, res) => {
     res.render('register');
 })
 
-userRouter.get('/current', passportCall('jwt'),(req, res) => {
+userRouter.get('/current', passportCall('jwt', {failureRedirect:'/login'}),(req, res) => {
     res.render('profile', req.user);
 })
 
@@ -60,12 +60,6 @@ userRouter.post('/login', async (req, res) => {
     }
 });
 
-userRouter.get('/faillogin', (req, res) =>{
-    res.send({error:"failed login"})
-})
-
-
-
 userRouter.get('/logout', (req, res) => {
     res.clearCookie('cookieToken');
     res.redirect('/login');
@@ -78,13 +72,5 @@ userRouter.get('/api/auth/github/callback', passport.authenticate('github', {fai
     res.cookie('cookieToken', token, { maxAge: 3600000, httpOnly: true });
     res.redirect('/products?limit=6');  
 })
-
-export function isAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-};
-
 
 export default userRouter;
