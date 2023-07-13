@@ -15,4 +15,8 @@ config.passport = {
     clientSecret: process.env.CLIENT_SECRET,
     callbackUrl: process.env.CALLBACK_URL
 }
+
+config.jwt = {
+    secretkey: process.env.SECRET_KEY,
+};
 export default config;

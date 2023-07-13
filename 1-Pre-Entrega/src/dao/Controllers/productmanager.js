@@ -1,31 +1,41 @@
 import productModel from '../models/products.js';
-class productManager {
-    constructor() {
 
-    }
+    
+    // const createProduct = async(product) {
 
-    async createProduct(product) {
+    //     let products = await productModel.create(product);
+    //     return products;
+    // }
 
-        let products = await productModel.create(product);
-        return products;
-    }
-
-    async getProduct(limit = 10, page = 1 , category, sort ) {
+    const getProduct = async (req, res)  =>{
         try {
-            const filter = category? {Category:category} : {};  
-            const SORT =  sort ? {Price:sort} : {Title: 1}
-            const products = await productModel.paginate(filter,{page: page, limit: limit, sort:SORT});
-            products.payload = 'productsado de los productos solicitados'
-            products.status = 'Ok';
-            products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=6&page=${products.prevPage}`:'';
-            products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=6&page=${products.nextPage}`:'';
-            const detalles = {...products}
-            delete detalles.docs
-            return products
+            
+                const { limit, pages, category, sort } = req.query;
+                const filter = category? {Category:category} : {};  
+                const SORT =  sort ? {Price:sort} : {Title: 1}
+                const cid = req.user.cart;
+                const products = await productModel.paginate(filter,{page: pages, limit: limit, sort:SORT});
+                products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=6&page=${products.prevPage}`:'';
+                products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=6&page=${products.nextPage}`:'';
+                const newProducts = products.docs.map(data => {
+                                return {
+                                    Title: data.Title,
+                                    Description: data.Description,
+                                    Price: data.Price,
+                                    Stock: data.Stock,
+                                    Category: data.Category,
+                                    Thumbnail: data.Thumbnail,
+                                    id:data._id,
+                                    cid,
+                                }
+                            })
+                const { prevLink, nextLink, totalDocs, page } = products
+                res.status(200).render('realTimeProducts', {products: newProducts, page, totalDocs, prevLink, nextLink})
+            
         } catch (err) {
             console.log('Error al obtener los productos', err)
         }
     }
-}
 
-export default productManager;
+
+export default getProduct;
