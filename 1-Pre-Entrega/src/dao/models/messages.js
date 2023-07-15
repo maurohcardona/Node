@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import db from './db.js';
+
 
 const collection = 'messages';
 
@@ -16,6 +16,6 @@ const schema = new mongoose.Schema({
 
 
 
-const messageModel = db.model(collection, schema);
+const messageModel = mongoose.model(collection, schema);
 
 export default messageModel;

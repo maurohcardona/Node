@@ -1,0 +1,6 @@
+{
+    "editor.codeActionsOnSave": {
+        
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always"
+}

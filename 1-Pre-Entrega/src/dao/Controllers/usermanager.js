@@ -1,14 +1,17 @@
-import userModel from "../models/users.js";
+import userService from "../services/user.services.js";
 import { isValidPassword } from "../../utils.js";
 import jwt from 'jsonwebtoken';
 import config from "../../config/config.js";
+
+const userdb = new userService();
 
 const secretKey = config.jwt.secretkey;
 
 export const login = async(req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await userModel.findOne({ email: email });
+        const user = await userdb.getUser(email);
+        console.log(user);
         if (!user) {
             console.log('User not found');
             res.render('login', { message: 'User not found' });

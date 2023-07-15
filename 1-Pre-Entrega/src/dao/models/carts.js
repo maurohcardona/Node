@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import db from "./db.js";
+
 
 const collection = 'carts'
 
@@ -21,7 +21,7 @@ const schema = new mongoose.Schema({
 });
 
 
-const cartModel = db.model(collection, schema);
+const cartModel = new mongoose.model(collection, schema);
 
 export default cartModel;
 

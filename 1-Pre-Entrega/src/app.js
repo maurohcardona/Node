@@ -1,12 +1,8 @@
 import  express  from 'express';
 import { __dirname, publics } from './utils.js';
-import productRouter from './Routs/products.js';
-import cartRouter from './Routs/carts.js';
-import messageManager from './dao/Controllers/messagemanager.js';
-import userRouter from './Routs/users.js';
+import indexRouter from './routes/index.routes.js';
 import { Server } from 'socket.io'
 import { engine }  from "express-handlebars";
-import messageRouter from './Routs/messages.js';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
@@ -32,11 +28,7 @@ app.use(passport.initialize());
 
 app.use(credentials(app))
 
-
-app.use('/products', productRouter)
-app.use('/', cartRouter)
-app.use('/', messageRouter);
-app.use('/', userRouter);
+app.use('/', indexRouter);
 
 
 const httpServer = app.listen(port, () =>{
