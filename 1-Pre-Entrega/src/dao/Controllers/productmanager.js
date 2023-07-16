@@ -1,5 +1,6 @@
-import productModel from '../models/products.js';
+import productService from "../services/products.services.js";
 
+const productsDB = new productService();
     
     // const createProduct = async(product) {
 
@@ -14,7 +15,7 @@ import productModel from '../models/products.js';
                 const filter = category? {Category:category} : {};  
                 const SORT =  sort ? {Price:sort} : {Title: 1}
                 const cid = req.user.cart;
-                const products = await productModel.paginate(filter,{page: pages, limit: limit, sort:SORT});
+                const products = await productsDB.getProducts(filter, pages, limit, SORT);
                 products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=6&page=${products.prevPage}`:'';
                 products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=6&page=${products.nextPage}`:'';
                 const newProducts = products.docs.map(data => {

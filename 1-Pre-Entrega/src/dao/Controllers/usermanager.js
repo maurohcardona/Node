@@ -11,7 +11,6 @@ export const login = async(req, res) => {
     const { email, password } = req.body;
     try {
         const user = await userdb.getUser(email);
-        console.log(user);
         if (!user) {
             console.log('User not found');
             res.render('login', { message: 'User not found' });
