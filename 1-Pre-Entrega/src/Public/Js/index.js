@@ -16,8 +16,9 @@ form.addEventListener('submit', (e) => {
     socket.emit('message', {
       user: user.value,
       message: message.value  
-    })
+    }, console.log(user.value, message.value))
     clearform()
+    
 })
 
 

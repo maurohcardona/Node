@@ -74,15 +74,3 @@ export const deleteAllProducts = async(req, res) => {
 
     
     
-
-
-// export const addCartByPoductId = async(req, res) => {
-//     try{
-//         const { cid, pid} = req.params
-//         const cart = await cartModel.find({_id: cid});
-//         cart[0].Cart.push({cart: pid});      
-//         await cartModel.updateOne({_id: cid}, cart[0]); 
-//     } catch (err) {
-//         console.log('Error agregar al carrito', err)
-//     }
-// }

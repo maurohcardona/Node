@@ -8,6 +8,7 @@ import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
 import { credentials } from './middlewares/user.middleware.js';
 import config from './config/config.js';
+import { handleSocketEvents } from './dao/Controllers/messagemanager.js';
 
 const app = express();
 
@@ -28,26 +29,18 @@ app.use(passport.initialize());
 
 app.use(credentials(app))
 
+
 app.use('/', indexRouter);
 
-
-const httpServer = app.listen(port, () =>{
+export const httpServer = app.listen(port, () =>{
     console.log(`listening on port ${port}`);
 })
 
 const io = new Server(httpServer)
+handleSocketEvents(io)
 
 
-io.on('connection', socket => {
-    console.log('New connection')   
 
-    socket.on('message', async data => {
-        const MessageManager  = new messageManager();
-        await MessageManager.createMessage(data);
-        const mensajes = await MessageManager.getMessage()
-        io.emit('messages', mensajes);
-    })  
-})
 
 
 
