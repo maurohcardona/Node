@@ -1,5 +1,4 @@
 import  express  from "express";
-import { uploader } from "../utils.js";
 import { passportCall } from "../middlewares/user.middleware.js";
 import productManager from '../dao/Controllers/productmanager.js';
 

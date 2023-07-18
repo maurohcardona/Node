@@ -1,87 +1,88 @@
-import cartModel from "../models/carts.js";
+import cartService from "../services/cart.services.js";
 
+const cartDB = new cartService();
+    
 
-class cartManager {
-    constructor(){
+export const createCart = async(req, res) => {
+    let result = await cartDB.createCart()
+    return result;
+}
 
+export const getCarts = async(req, res) => {
+    try {
+        const carts = await cartDB.getCarts();
+        res.status(200).send(carts)
+    } catch (err) {
+        console.log('Error al obtener los productos', err)
     }
+}
 
-    async createCart(cart) {
-        let result = await cartModel.create(cart);
-        return result;
-    }
-
-    async getCarts() {
-        try {
-            const carts = await cartModel.find({}).lean();
-            return carts
-        } catch (err) {
-            console.log('Error al obtener los productos', err)
-        }
-    }
-
-    async getCartsById(cid) {
-        try{
-            const cart = await cartModel.findById(cid)
-            return cart
-        } catch (err) {
-            console.log('Error al obtener el carrito', err)
-        }
-    }
-
-    async addCartByPoductId(cid, pid) {
-        try{
-            const cart = await cartModel.find({_id: cid});
-            cart[0].Cart.push({cart: pid});      
-            await cartModel.updateOne({_id: cid}, cart[0]); 
-        } catch (err) {
-            console.log('Error agregar al carrito', err)
-        }
-    }
-
-    async addOnlyCuontity (cid, pid, quantity) {
-        try{
-            if (quantity === undefined) {
-                const cart = await cartModel.findById(cid);
-                const product = cart.Cart.find(p => p.cart.toString() === pid);
-                if (product) {
-                    quantity = product.quantity + 1;
-                }
+export const getCartById = async(req, res) => {
+    try{
+        const cid = req.params.cid;
+        const cart = await cartDB.getCompleteCart(cid);
+        const newProducts = cart.Cart.map(data => {
+            return {
+                Title: data.cart.Title,
+                Description: data.cart.Description,
+                Price: data.cart.Price,
+                Stock: data.cart.Stock,
+                Category: data.cart.Category,
+                Thumbnail: data.cart.Thumbnail,
+                id:data.cart._id,
+                quantity:data.quantity
             }
-            await cartModel.findOneAndUpdate(
-                {_id: cid, 'Cart.cart':pid},
-                { $set: { 'Cart.$.quantity': quantity } },
-                { new: true }
-            )
-        }catch (err) {
-            console.log('Error al modificar la cantidad', err)
-        }
+    })     
+    res.status(200).render('cart', {products: newProducts});
+    } catch (err) {
+        console.log(err);
     }
-
-    async deleteAllProducts (cid) {
-        try{
-            await cartModel.findOneAndUpdate(
-                { _id: cid },
-                { $set: { Cart: [] } },
-                { new: true }
-              );
-        } catch (err) {
-            console.log('Error al eliminar los productos del carrito', err)
-        }
-    }
-
-    async getCompleteCart (cid) {
-        try{
-            const cart = await cartModel.findById(cid).populate('Cart.cart')
-            return cart.Cart
-        } catch (err) {
-            console.log('Error al mostrar el carrito', err)
-        }
-    }
-
+};
     
-    
+
+export const addCartByPoductId = async(req, res) => {
+    try{
+        const { cid, pid} = req.params
+        const idcart = await cartDB.getCartById(cid);
+        const isInCart = idcart.Cart.some(product => (product.cart).toString() === pid);
+        if(isInCart) {
+            await cartDB.addOnlyQuantity(cid, pid);
+            await cartDB.getCompleteCart(cid);
+            res.status(200).redirect('/products?limit=6');
+            return
+        }
+        await cartDB.addCartByProductId(cid, pid);
+        await cartDB.getCompleteCart(cid);
+        res.status(200).redirect('/products?limit=6');
+    } catch (err) {
+        console.log('Error agregar al carrito', err)
+    }
+}
+
+export const deleteAllProducts = async(req, res) => {
+    try{
+        const { cid } = req.params;
+        await cartDB.deleteProductsCart(cid)
+        res.status(200).send('products removed');
+    } catch (err) {
+        console.log('Error al eliminar los productos del carrito', err)
+    }
 }
 
 
-export default cartManager;
+
+
+    
+    
+
+
+// export const addCartByPoductId = async(req, res) => {
+//     try{
+//         const { cid, pid} = req.params
+//         const cart = await cartModel.find({_id: cid});
+//         cart[0].Cart.push({cart: pid});      
+//         await cartModel.updateOne({_id: cid}, cart[0]); 
+//     } catch (err) {
+//         console.log('Error agregar al carrito', err)
+//     }
+// }

@@ -2,6 +2,7 @@ import userService from "../services/user.services.js";
 import { isValidPassword } from "../../utils.js";
 import jwt from 'jsonwebtoken';
 import config from "../../config/config.js";
+import { passportCall } from "../../middlewares/user.middleware.js";
 
 const userdb = new userService();
 
@@ -33,3 +34,34 @@ export const logout = (req, res) => {
     res.clearCookie('cookieToken');
     res.redirect('/login');
 }
+
+export const renderHome = (req, res) => res.render('home');
+
+export const renderRegister = (req, res) => res.render('register');
+
+export const current = (req, res) => {
+    passportCall('jwt', { failureRedirect: '/login' })(req, res, () => {
+      res.render('profile', req.user);
+    });
+  };
+
+export const register = (req, res) => { 
+    passport.authenticate('register', {failureRedirect:'/failregister'}), async (req, res) => {
+    res.redirect('/login');
+}};
+
+export const failedRegister = (req, res) => {
+    console.log('Failed strategy');
+    res.send({error: 'failed'});
+};
+
+export const renderLogin = (req, res) => res.render('login');
+
+export const githubToken = (req, res) => { 
+    const token = req.user 
+    res.cookie('cookieToken', token, { maxAge: 3600000, httpOnly: true });
+    res.redirect('/products?limit=6');   
+};
+
+
+
