@@ -36,7 +36,7 @@ const initializePassport = () => {
                 let user =  await userService.getUser(username);
                 if (user) {
                     console.log('User already registered')
-                    return done(null, false, req.flash('success', 'User already registered'));
+                    return done(null, false,);
                 }
                 const cart = await cartService.createCart(); 
                 const newUser = {

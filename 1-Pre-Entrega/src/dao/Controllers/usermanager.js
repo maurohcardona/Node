@@ -2,7 +2,6 @@ import * as userService from "../services/user.services.js";
 import { isValidPassword } from "../../utils.js";
 import jwt from 'jsonwebtoken';
 import config from "../../config/config.js";
-import passport from "passport";
 import { passportCall } from "../../middlewares/user.middleware.js";
 
 const secretKey = config.jwt.secretkey;
