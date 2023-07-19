@@ -1,17 +1,16 @@
-import userService from "../services/user.services.js";
+import * as userService from "../services/user.services.js";
 import { isValidPassword } from "../../utils.js";
 import jwt from 'jsonwebtoken';
 import config from "../../config/config.js";
+import passport from "passport";
 import { passportCall } from "../../middlewares/user.middleware.js";
-
-const userdb = new userService();
 
 const secretKey = config.jwt.secretkey;
 
 export const login = async(req, res) => {
     const { email, password } = req.body;
     try {
-        const user = await userdb.getUser(email);
+        const user = await userService.getUser(email);
         if (!user) {
             console.log('User not found');
             res.render('login', { message: 'User not found' });
@@ -46,9 +45,9 @@ export const current = (req, res) => {
   };
 
 export const register = (req, res) => { 
-    passport.authenticate('register', {failureRedirect:'/failregister'}), async (req, res) => {
+
     res.redirect('/login');
-}};
+};
 
 export const failedRegister = (req, res) => {
     console.log('Failed strategy');

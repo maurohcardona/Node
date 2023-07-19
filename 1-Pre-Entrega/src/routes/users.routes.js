@@ -10,7 +10,7 @@ userRouter.get('/register', usermanager.renderRegister);
 
 userRouter.get('/current', usermanager.current);
 
-userRouter.post('/register', usermanager.register);
+userRouter.post('/register',passport.authenticate('register', {failureRedirect:'/failregister'}), usermanager.register);
 
 userRouter.get('/failregister', usermanager.failedRegister);
 

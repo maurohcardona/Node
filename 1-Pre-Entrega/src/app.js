@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import { credentials } from './middlewares/user.middleware.js';
 import config from './config/config.js';
 import { handleSocketEvents } from './dao/Controllers/messagemanager.js';
+import conection from './config/db.config.js';
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(credentials(app))
 app.use('/', indexRouter);
 
 export const httpServer = app.listen(port, () =>{
+    conection()
     console.log(`listening on port ${port}`);
 })
 

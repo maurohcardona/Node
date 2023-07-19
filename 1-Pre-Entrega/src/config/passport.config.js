@@ -1,16 +1,13 @@
 import passport from "passport";
 import local from "passport-local";
-import userService from "../dao/services/user.services.js";
+import * as userService from "../dao/services/user.services.js";
 import { createHash } from "../utils.js";
 import GitHubStrategy from "passport-github2"
 import "dotenv/config";
 import config from "./config.js";
-import cartService from "../dao/services/cart.services.js";
+import * as cartService from "../dao/services/cart.services.js";
 import jwtp from 'passport-jwt';
 import jwt from 'jsonwebtoken';
-
-const userDB = new userService();
-const cartDB = new cartService();
 
 const clientId = config.passport.clientId;
 const clientSecret = config.passport.clientSecret;
@@ -34,13 +31,14 @@ const initializePassport = () => {
     passport.use('register', new localStrategy(
         {passReqToCallback:true, usernameField: 'email'}, async (req, username, password, done) => {
             const { firstname, lastname, email, age } = req.body;
+            console.log(req.body);
             try {
-                let user =  await userDB.getUser(username);
+                let user =  await userService.getUser(username);
                 if (user) {
                     console.log('User already registered')
                     return done(null, false, req.flash('success', 'User already registered'));
                 }
-                const cart = await cartDB.createCart(); 
+                const cart = await cartService.createCart(); 
                 const newUser = {
                     firstname,
                     lastname,
@@ -49,7 +47,7 @@ const initializePassport = () => {
                     password: createHash(password),
                     cart: cart._id
                 }
-                let result = await userDB.createUser(newUser);
+                let result = await userService.createUser(newUser);
                 return done(null, result);
             } catch (err) {
                 return done('Register faild', err);
@@ -63,9 +61,9 @@ const initializePassport = () => {
         callbackUrl: callbackUrl
     }, async (accessToken, refreshToken, profile, done) => {
         try {
-            let user = await userDB.getUser(profile._json.email);
+            let user = await userService.getUser(profile._json.email);
             if (!user) {
-                const cart = await cartDB.createCart();
+                const cart = await cartService.createCart();
                 const email =profile._json.email? profile._json.email: 'Not mail'; 
                 let newUser = {
                     firstname: profile._json.name,
@@ -75,7 +73,7 @@ const initializePassport = () => {
                     password: '',
                     cart: cart._id
                 }   
-                await userDB.createUser(newUser);
+                await userService.createUser(newUser);
                 const { firstname, lastname } = newUser;
                 const token = jwt.sign({firstname, lastname, email, cart, age}, 'SecretCode');
                 done(null, token);
@@ -109,7 +107,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    let user = userDB.getUserById(id);
+    let user = userService.getUserById(id);
     done(null, user);
 });
 

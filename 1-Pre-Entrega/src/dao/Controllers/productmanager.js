@@ -1,15 +1,15 @@
-import productService from "../services/products.services.js";
+import * as productService from "../services/products.services.js";
 
-const productsDB = new productService();
-    
+
 export const getProducts = async (req, res)  =>{
     try {
         const { limit, category, sort } = req.query;
         const pages = req.query.page;
+        const PAGE = pages? pages : 1;
         const filter = category? {Category:category} : {};  
         const SORT =  sort ? {Price:sort} : {Title: 1}
         const cid = req.user.cart;
-        const products = await productsDB.getProducts(filter, pages, limit, SORT);
+        const products = await productService.getProducts(filter, PAGE, limit, SORT);
         products.prevLink = products.hasPrevPage?`http://localhost:8080/products?limit=6&page=${products.prevPage}`:'';
         products.nextLink = products.hasNextPage?`http://localhost:8080/products?limit=6&page=${products.nextPage}`:'';
         const newProducts = products.docs.map(data => {
@@ -47,7 +47,7 @@ export const createProduct = async(req, res) => {
             res.status(500).send('Falta completar la categoria')
         }else {
             const newProduct = {Title, Description, Price, Stock, Thumbnail, Category}
-            await productsDB.createProduct(newProduct);
+            await productService.createProduct(newProduct);
             res.status(200).send(newProduct);
         }
     } catch (err) {

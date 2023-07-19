@@ -1,49 +1,41 @@
 import cartModel from "../models/carts.js";
-import MongoSingleton from "../../config/db.config.js";
 
-class cartService {
+export const createCart = async() => await cartModel.create();
 
-    constructor() {
-        const db = MongoSingleton.getIstance();
-    };
+export const getCarts = async() => await cartModel.find({}).lean();
 
-    createCart = async() => await cartModel.create();
+export const getCartById = async(id) => await cartModel.findById(id);
 
-    getCarts = async() => await cartModel.find({}).lean();
+export const addCartByProductId = async(cid, pid) => await cartModel.updateOne({_id: cid}, {$push: {products: pid}});
 
-    getCartById = async(id) => await cartModel.findById(id);
+export const updateCart = async(cid, pid) => await cartModel.updateOne(
+    {_id: cid, 'Cart.cart':pid},
+    { $set: { 'Cart.$.quantity': quantity } },
+    { new: true }
+)
 
-    addCartByProductId = async(cid, pid) => await cartModel.updateOne({_id: cid}, {$push: {products: pid}});
+export const deleteProductsCart = async(cid) => await cartModel.findOneAndUpdate(
+    { _id: cid },
+    { $set: { Cart: [] } },
+    { new: true }
+);
 
-    updateCart = async(cid, pid) => await cartModel.updateOne(
-        {_id: cid, 'Cart.cart':pid},
-        { $set: { 'Cart.$.quantity': quantity } },
-        { new: true }
-    )
+export const getCompleteCart = async(cid) => await cartModel.findById(cid).populate('Cart.cart')
 
-    deleteProductsCart = async(cid) => await cartModel.findOneAndUpdate(
-        { _id: cid },
-        { $set: { Cart: [] } },
-        { new: true }
-    );
-
-    getCompleteCart = async(cid) => await cartModel.findById(cid).populate('Cart.cart')
-
-    addOnlyQuantity = async(cid, pid, quantity) => {
-        try{
-            if (quantity === undefined) {
-                const cart = await cartModel.findById(cid);
-                const product = cart.Cart.find(p => p.cart.toString() === pid);
-                if (product) {
-                    quantity = product.quantity + 1;
-                }
+export const addOnlyQuantity = async(cid, pid, quantity) => {
+    try{
+        if (quantity === undefined) {
+            const cart = await cartModel.findById(cid);
+            const product = cart.Cart.find(p => p.cart.toString() === pid);
+            if (product) {
+                quantity = product.quantity + 1;
             }
-            await cartModel.updateCart(cid, pid)
-        }catch (err) {
-            console.log('Error al modificar la cantidad', err)
         }
+        await cartModel.updateCart(cid, pid)
+    }catch (err) {
+        console.log('Error al modificar la cantidad', err)
     }
-
 }
 
-export default cartService;
+
+

@@ -1,16 +1,14 @@
-import cartService from "../services/cart.services.js";
-
-const cartDB = new cartService();
+import * as cartService from "../services/cart.services.js";
     
 
 export const createCart = async(req, res) => {
-    let result = await cartDB.createCart()
+    let result = await cartService.createCart()
     return result;
 }
 
 export const getCarts = async(req, res) => {
     try {
-        const carts = await cartDB.getCarts();
+        const carts = await cartService.getCarts();
         res.status(200).send(carts)
     } catch (err) {
         console.log('Error al obtener los productos', err)
@@ -20,7 +18,7 @@ export const getCarts = async(req, res) => {
 export const getCartById = async(req, res) => {
     try{
         const cid = req.params.cid;
-        const cart = await cartDB.getCompleteCart(cid);
+        const cart = await cartService.getCompleteCart(cid);
         const newProducts = cart.Cart.map(data => {
             return {
                 Title: data.cart.Title,
@@ -43,16 +41,16 @@ export const getCartById = async(req, res) => {
 export const addCartByPoductId = async(req, res) => {
     try{
         const { cid, pid} = req.params
-        const idcart = await cartDB.getCartById(cid);
+        const idcart = await cartService.getCartById(cid);
         const isInCart = idcart.Cart.some(product => (product.cart).toString() === pid);
         if(isInCart) {
-            await cartDB.addOnlyQuantity(cid, pid);
-            await cartDB.getCompleteCart(cid);
+            await cartService.addOnlyQuantity(cid, pid);
+            await cartService.getCompleteCart(cid);
             res.status(200).redirect('/products?limit=6');
             return
         }
-        await cartDB.addCartByProductId(cid, pid);
-        await cartDB.getCompleteCart(cid);
+        await cartService.addCartByProductId(cid, pid);
+        await cartService.getCompleteCart(cid);
         res.status(200).redirect('/products?limit=6');
     } catch (err) {
         console.log('Error agregar al carrito', err)
@@ -62,7 +60,7 @@ export const addCartByPoductId = async(req, res) => {
 export const deleteAllProducts = async(req, res) => {
     try{
         const { cid } = req.params;
-        await cartDB.deleteProductsCart(cid)
+        await cartService.deleteProductsCart(cid)
         res.status(200).send('products removed');
     } catch (err) {
         console.log('Error al eliminar los productos del carrito', err)
