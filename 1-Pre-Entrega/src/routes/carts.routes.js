@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCarts, addCartByPoductId, deleteAllProducts, getCartById } from '../dao/Controllers/cartmanager.js';
+import { getCarts, addCartByPoductId, deleteAllProducts, getCartById } from '../Controllers/cart.controller.js';
 
 
 const cartRouter = express.Router()

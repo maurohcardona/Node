@@ -15,8 +15,11 @@ const schema = new mongoose.Schema({
                 quantity: {type: Number, default: 1},
             }
         ],
-
-        default: []
+        default: [],
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users"
+        } 
     }
 });
 

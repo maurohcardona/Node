@@ -8,7 +8,7 @@ import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
 import { credentials } from './middlewares/user.middleware.js';
 import config from './config/config.js';
-import { handleSocketEvents } from './dao/Controllers/messagemanager.js';
+import { handleSocketEvents } from './Controllers/message.controller.js';
 import conection from './config/db.config.js';
 
 const app = express();

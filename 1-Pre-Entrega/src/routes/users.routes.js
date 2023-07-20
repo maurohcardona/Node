@@ -1,6 +1,6 @@
 import  express  from "express";
 import passport from "passport";
-import * as usermanager from "../dao/Controllers/usermanager.js";
+import * as usermanager from "../Controllers/user.controller.js";
 
 const userRouter = express.Router();
 
@@ -10,7 +10,7 @@ userRouter.get('/register', usermanager.renderRegister);
 
 userRouter.get('/current', usermanager.current);
 
-userRouter.post('/register',passport.authenticate('register', {failureRedirect:'/failregister'}), usermanager.register);
+userRouter.post('/register', usermanager.registerUser);
 
 userRouter.get('/failregister', usermanager.failedRegister);
 

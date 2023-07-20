@@ -1,8 +1,8 @@
 import * as userService from "../services/user.services.js";
-import { isValidPassword } from "../../utils.js";
+import { isValidPassword, createHash } from "../utils.js";
 import jwt from 'jsonwebtoken';
-import config from "../../config/config.js";
-import { passportCall } from "../../middlewares/user.middleware.js";
+import config from "../config/config.js";
+import { passportCall } from "../middlewares/user.middleware.js";
 
 const secretKey = config.jwt.secretkey;
 
@@ -26,6 +26,28 @@ export const login = async(req, res) => {
         console.log(err);
         return console.log(err.message, err);
     }
+};
+
+export const registerUser = async(req, res) => {
+    const { firstname, lastname, email, age, password } = req.body;
+        try {
+            let user =  await userService.getUser(email);
+            if (user) {
+                console.log('User registered');
+                res.render('login', { message: 'User registered' });
+            }
+            const newUser = {
+                firstname,
+                lastname,
+                email,
+                age,
+                password: createHash(password),
+            }
+            await userService.createUser(newUser);
+            res.status(200).render('login');
+        } catch (err) {
+            return console.log('Register faild', err);
+        }
 };
 
 export const logout = (req, res) => {

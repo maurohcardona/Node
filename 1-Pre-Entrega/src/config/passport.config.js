@@ -1,11 +1,10 @@
 import passport from "passport";
 import local from "passport-local";
-import * as userService from "../dao/services/user.services.js";
-import { createHash } from "../utils.js";
+import * as userService from "../services/user.services.js";
 import GitHubStrategy from "passport-github2"
 import "dotenv/config";
 import config from "./config.js";
-import * as cartService from "../dao/services/cart.services.js";
+import * as cartService from "../services/cart.services.js";
 import jwtp from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 
@@ -28,33 +27,6 @@ const cookieExtractor = req => {
 
 const initializePassport = () => {
     
-    passport.use('register', new localStrategy(
-        {passReqToCallback:true, usernameField: 'email'}, async (req, username, password, done) => {
-            const { firstname, lastname, email, age } = req.body;
-            console.log(req.body);
-            try {
-                let user =  await userService.getUser(username);
-                if (user) {
-                    console.log('User already registered')
-                    return done(null, false,);
-                }
-                const cart = await cartService.createCart(); 
-                const newUser = {
-                    firstname,
-                    lastname,
-                    email,
-                    age,
-                    password: createHash(password),
-                    cart: cart._id
-                }
-                let result = await userService.createUser(newUser);
-                return done(null, result);
-            } catch (err) {
-                return done('Register faild', err);
-            }
-        }
-    ))
-
     passport.use('github', new GitHubStrategy.Strategy ({
         clientID: clientId,
         clientSecret: clientSecret,
