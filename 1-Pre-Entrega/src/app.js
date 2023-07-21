@@ -6,7 +6,6 @@ import { engine }  from "express-handlebars";
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import cookieParser from "cookie-parser";
-import { credentials } from './middlewares/user.middleware.js';
 import config from './config/config.js';
 import { handleSocketEvents } from './Controllers/message.controller.js';
 import conection from './config/db.config.js';
@@ -27,9 +26,6 @@ app.use(cookieParser());
 
 initializePassport();
 app.use(passport.initialize());
-
-app.use(credentials(app))
-
 
 app.use('/', indexRouter);
 

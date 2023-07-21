@@ -1,5 +1,4 @@
 import passport from "passport";
-import local from "passport-local";
 import * as userService from "../services/user.services.js";
 import GitHubStrategy from "passport-github2"
 import "dotenv/config";
@@ -14,8 +13,6 @@ const callbackUrl = config.passport.callbackUrl;
 
 const JWTStrategy = jwtp.Strategy;
 const ExtractJWT = jwtp.ExtractJwt;
-
-const localStrategy = local.Strategy;
 
 const cookieExtractor = req => {
     let token = null;
@@ -35,23 +32,21 @@ const initializePassport = () => {
         try {
             let user = await userService.getUser(profile._json.email);
             if (!user) {
-                const cart = await cartService.createCart();
                 const email =profile._json.email? profile._json.email: 'Not mail'; 
                 let newUser = {
                     firstname: profile._json.name,
                     lastname: '',
                     email,
                     age:'',
-                    password: '',
-                    cart: cart._id
+                    password: '',  
                 }   
                 await userService.createUser(newUser);
                 const { firstname, lastname } = newUser;
-                const token = jwt.sign({firstname, lastname, email, cart, age}, 'SecretCode');
+                const token = jwt.sign({firstname, lastname, email, age}, 'SecretCode');
                 done(null, token);
             } else {
                 const { firstname, lastname, email, cart, age } = user;
-                const token = jwt.sign({firstname, lastname, email, cart, age}, 'SecretCode');
+                const token = jwt.sign({firstname, lastname, email, age}, 'SecretCode');
                 done(null, token);
             }
         } catch (error) {

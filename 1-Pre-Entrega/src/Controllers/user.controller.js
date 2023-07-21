@@ -1,10 +1,8 @@
 import * as userService from "../services/user.services.js";
 import { isValidPassword, createHash } from "../utils.js";
-import jwt from 'jsonwebtoken';
-import config from "../config/config.js";
-import { passportCall } from "../middlewares/user.middleware.js";
+import { hasToken } from "../middlewares/user.middleware.js";
+import { generateToken } from "../libs/user.libs.js";
 
-const secretKey = config.jwt.secretkey;
 
 export const login = async(req, res) => {
     const { email, password } = req.body;
@@ -18,8 +16,7 @@ export const login = async(req, res) => {
             return res.render('login', { message: 'Wrong password' })
         };
         delete user.password
-        const { firstname, lastname, age, cart } = user
-        const token = jwt.sign({ email, firstname, lastname, age, cart }, secretKey, { expiresIn: '1h' });
+        const token = generateToken({id: user.id, email: user.email, age: user.age})
         res.cookie('cookieToken', token, { maxAge: 3600000, httpOnly: true });
         res.redirect('/products?limit=6'); 
     } catch (err) {
@@ -60,7 +57,7 @@ export const renderHome = (req, res) => res.render('home');
 export const renderRegister = (req, res) => res.render('register');
 
 export const current = (req, res) => {
-    passportCall('jwt', { failureRedirect: '/login' })(req, res, () => {
+    hasToken('jwt', { failureRedirect: '/login' })(req, res, () => {
       res.render('profile', req.user);
     });
   };
