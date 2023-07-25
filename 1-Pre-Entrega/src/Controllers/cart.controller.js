@@ -1,9 +1,24 @@
 import * as cartService from "../services/cart.services.js";
+import * as ticketService from "../services/ticket.services.js";
+import { checkStocks, createTicket } from "../libs/cart.libs.js";
     
 
 export const createCart = async(req, res) => {
-    let result = await cartService.createCart()
-    return result;
+    try{
+        const newCart = req.body;
+        const hasStock = await checkStocks(newCart.Cart);
+        if (hasStock !== 'ok') throw new Error (hasStock);
+            await cartService.createCart(newCart);
+            const ticket = await createTicket(newCart);
+            await ticketService.createTicket(ticket);
+            res.status(200).send('Cart created successfully');
+        
+        
+    } catch(error) {
+        return res.status(500).send(error.message);
+        
+    }
+    
 }
 
 export const getCarts = async(req, res) => {

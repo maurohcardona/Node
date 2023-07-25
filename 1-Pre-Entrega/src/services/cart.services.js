@@ -1,6 +1,6 @@
 import cartModel from "../models/carts.js";
 
-export const createCart = async() => await cartModel.create();
+export const createCart = async(newCart) => await cartModel.create(newCart);
 
 export const getCarts = async() => await cartModel.find({}).lean();
 
@@ -20,7 +20,7 @@ export const deleteProductsCart = async(cid) => await cartModel.findOneAndUpdate
     { new: true }
 );
 
-export const getCompleteCart = async(cid) => await cartModel.findById(cid).populate('Cart.cart')
+export const getCompleteCart = async(cid) => await cartModel.findOne({_id: cid}).populate('Cart.cart')
 
 export const addOnlyQuantity = async(cid, pid, quantity) => {
     try{

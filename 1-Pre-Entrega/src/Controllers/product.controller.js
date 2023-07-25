@@ -55,6 +55,24 @@ export const createProduct = async(req, res) => {
     }
 }
 
+export const updateProduct = async(req, res) => {
+    try{
+        const { idProduct } = req.params;
+        const  updateProduct  = req.body;
+        const update = await productService.updateProduct(idProduct, updateProduct);
+        res.status(200).send(update);
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const deleteProduct = async(req, res) => {
+    const  { idProduct }  = req.params;
+    await productService.deleteProduct(idProduct)
+    res.status(200).send('Product deleted');
+    
+}
+
 
 
 

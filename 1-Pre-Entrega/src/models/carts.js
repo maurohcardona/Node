@@ -16,12 +16,18 @@ const schema = new mongoose.Schema({
             }
         ],
         default: [],
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "users"
-        } 
+        
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "users"
+    } 
+},
+    {
+        timestamps: true
     }
-});
+);
 
 
 const cartModel = new mongoose.model(collection, schema);

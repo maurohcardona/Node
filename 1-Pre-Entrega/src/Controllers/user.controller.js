@@ -16,7 +16,7 @@ export const login = async(req, res) => {
             return res.render('login', { message: 'Wrong password' })
         };
         delete user.password
-        const token = generateToken({id: user.id, email: user.email, age: user.age})
+        const token = generateToken(user)
         res.cookie('cookieToken', token, { maxAge: 3600000, httpOnly: true });
         res.redirect('/products?limit=6'); 
     } catch (err) {

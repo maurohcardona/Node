@@ -14,11 +14,11 @@ const app = express();
 
 const port = config.server.port
 
+app.use(express.static(publics));
 app.engine('handlebars', engine())
 app.set('views', __dirname + '/Views')
 app.set('view engine', 'handlebars')
 
-app.use(express.static(publics));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true } )) 
 app.use(cookieParser());
