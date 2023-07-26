@@ -4,7 +4,7 @@ import { getCarts, addCartByPoductId, deleteAllProducts, getCartById, createCart
 
 const cartRouter = express.Router()
 
-cartRouter.post('/cart', createCart)
+cartRouter.post('/purchase', createCart)
 
 cartRouter.get('/carts', getCarts)
 
