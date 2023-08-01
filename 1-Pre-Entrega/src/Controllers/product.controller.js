@@ -1,5 +1,7 @@
 import * as productService from "../services/products.services.js";
-
+import { generateProducts } from "../utils.js";
+import { errorProduct } from "../services/errors/customerror.js";
+import Eerrors from "../services/errors/enums.js"
 
 export const getProducts = async (req, res)  =>{
     try {
@@ -35,16 +37,9 @@ export const getProducts = async (req, res)  =>{
 export const createProduct = async(req, res) => {
     try {
         const {Title, Description, Price, Stock, Category, Thumbnail} = req.body;
-        if((!Stock )) {
-            res.status(500).send('Falta completar el stock')
-        }else if(!Title){
-            res.status(500).send('Falta completar el titulo')
-        }else if(!Description){
-            res.status(500).send('Falta completar la descripcion')
-        }else if (!Price){
-            res.status(500).send('Falta completar el precio')
-        }else if(!Category){
-            res.status(500).send('Falta completar la categoria')
+        if(!Stock || !Category || !Thumbnail || !Description || !Price || !Stock) {
+            throw new errorProduct('Falta completar datos del producto', Eerrors.INVALID_PARAM);
+            
         }else {
             const newProduct = {Title, Description, Price, Stock, Thumbnail, Category}
             await productService.createProduct(newProduct);
@@ -52,6 +47,10 @@ export const createProduct = async(req, res) => {
         }
     } catch (err) {
         console.error(err);
+        res.status(500).send(
+            `Error: ${err.name}
+            Mensaje: ${err.message} 
+            Codigo: ${err.code}`);
     }
 }
 
@@ -72,6 +71,15 @@ export const deleteProduct = async(req, res) => {
     res.status(200).send('Product deleted');
     
 }
+
+export const createMockProduct = async(req, res) => {
+    let users = [];
+    for (let i = 0; i < 100; i++) {
+        users.push(generateProducts());
+    }
+    res.status(200).send(users);
+};
+
 
 
 
