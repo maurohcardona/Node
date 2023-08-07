@@ -9,6 +9,8 @@ import cookieParser from "cookie-parser";
 import config from './config/config.js';
 import { handleSocketEvents } from './Controllers/message.controller.js';
 import conection from './config/db.config.js';
+import addlogger from './middlewares/logger.middleware.js';
+import log from './logs/devlogger.js';
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.set('view engine', 'handlebars')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true } )) 
 app.use(cookieParser());
+app.use(addlogger);
 
 
 initializePassport();
@@ -31,7 +34,7 @@ app.use('/', indexRouter);
 
 export const httpServer = app.listen(port, () =>{
     conection()
-    console.log(`listening on port ${port}`);
+    log.http(`listening on port ${port}`);
 })
 
 const io = new Server(httpServer)

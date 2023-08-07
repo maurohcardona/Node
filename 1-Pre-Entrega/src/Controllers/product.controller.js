@@ -30,7 +30,7 @@ export const getProducts = async (req, res)  =>{
         res.status(200).render('realTimeProducts', {products: newProducts, page, totalDocs, prevLink, nextLink})
     
     } catch (err) {
-        console.log('Error al obtener los productos', err)
+        req.logger.error.log('Error al obtener los productos', err)
     }
 }
 
@@ -46,7 +46,7 @@ export const createProduct = async(req, res) => {
             res.status(200).send(newProduct);
         }
     } catch (err) {
-        console.error(err);
+        req.logger.error.error(err);
         res.status(500).send(
             `Error: ${err.name}
             Mensaje: ${err.message} 
@@ -61,7 +61,7 @@ export const updateProduct = async(req, res) => {
         const update = await productService.updateProduct(idProduct, updateProduct);
         res.status(200).send(update);
     } catch (error) {
-        console.error(error)
+        req.logger.error(error)
     }
 }
 

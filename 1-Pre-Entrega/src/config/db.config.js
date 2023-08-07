@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import config from './config.js';
+import log from '../logs/devlogger.js';
 
 const mongodb = config.db.dbconnection;
 
@@ -8,9 +9,9 @@ const conection = async () => {
         const conn = await mongoose.connect(mongodb,{
                             dbName: 'ecommerce', 
                             });
-        console.log("Coneccion establecida correctamente: ");
+        log.http("Coneccion establecida correctamente: ");
     } catch (e) {
-        console.log("Error: ", e);
+        log.error("Error: ", e);
     }
 }
 

@@ -3,7 +3,8 @@ import "dotenv/config";
 let config = {};
 
 config.server = {
-    port: process.env.PORT
+    port: process.env.PORT,
+    env: process.env.NODE_ENV
 }
 
 config.db = {

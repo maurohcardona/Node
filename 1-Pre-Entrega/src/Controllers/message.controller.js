@@ -10,13 +10,13 @@ export const createMessages = async (req, res) => {
         await messagesService.createMessage(newMessage);
         res.status(200).send('Mensaje enviado')
     } catch (error) {
-        console.error('No se puede mandar el mensaje', error);
+        req.logger.error('No se puede mandar el mensaje', error);
     }
 };
 
 export function handleSocketEvents(io) {
     io.on('connection', socket => {
-      console.log('New connection');
+      req.logger.error('New connection');
   
       socket.on('message', async data => {
         await messagesService.createMessage(data);

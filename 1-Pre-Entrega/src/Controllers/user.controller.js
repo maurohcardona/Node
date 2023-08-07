@@ -9,7 +9,7 @@ export const login = async(req, res) => {
     try {
         const user = await userService.getUser(email);
         if (!user) {
-            console.log('User not found');
+            req.logger.error('Usuario no encontrado');
             res.render('login', { message: 'User not found' });
         }
         if (!isValidPassword(user, password)) {
@@ -20,8 +20,7 @@ export const login = async(req, res) => {
         res.cookie('cookieToken', token, { maxAge: 3600000, httpOnly: true });
         res.redirect('/products?limit=6'); 
     } catch (err) {
-        console.log(err);
-        return console.log(err.message, err);
+        return req.logger.error(err.message, err);
     }
 };
 
@@ -30,7 +29,7 @@ export const registerUser = async(req, res) => {
         try {
             let user =  await userService.getUser(email);
             if (user) {
-                console.log('User registered');
+                req.logger.info('User registered');
                 res.render('login', { message: 'User registered' });
             }
             const newUser = {
@@ -43,7 +42,7 @@ export const registerUser = async(req, res) => {
             await userService.createUser(newUser);
             res.status(200).render('login');
         } catch (err) {
-            return console.log('Register faild', err);
+            return req.logger.error('Register faild', err);
         }
 };
 
@@ -68,7 +67,7 @@ export const register = (req, res) => {
 };
 
 export const failedRegister = (req, res) => {
-    console.log('Failed strategy');
+    req.logger.error('Failed strategy');
     res.send({error: 'failed'});
 };
 

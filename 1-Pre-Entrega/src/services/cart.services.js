@@ -33,7 +33,7 @@ export const addOnlyQuantity = async(cid, pid, quantity) => {
         }
         await cartModel.updateCart(cid, pid)
     }catch (err) {
-        console.log('Error al modificar la cantidad', err)
+        req.logger.error('Error al modificar la cantidad', err)
     }
 }
 
