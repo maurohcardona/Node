@@ -9,7 +9,8 @@ export const createMessages = async (req, res) => {
     await messagesService.createMessage(newMessage);
     res.status(200).send("Mensaje enviado");
   } catch (error) {
-    req.logger.error("No se puede mandar el mensaje", error);
+    log.error("No se pueden mandar los mensages", err);
+    res.status(500).json({ error: err.message });
   }
 };
 

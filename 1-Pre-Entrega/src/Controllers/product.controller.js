@@ -1,6 +1,7 @@
 import * as productService from "../services/products.services.js";
 import { generateProducts } from "../utils.js";
 import { errorProduct } from "../services/errors/customerror.js";
+import log from "../config/logs/devlogger.js";
 import Eerrors from "../services/errors/enums.js";
 
 export const getProducts = async (req, res) => {
@@ -44,7 +45,8 @@ export const getProducts = async (req, res) => {
       nextLink,
     });
   } catch (err) {
-    req.logger.error("Error al obtener los productos", err);
+    log.error("Error al obtener los productos", err);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -69,7 +71,7 @@ export const createProduct = async (req, res) => {
       res.status(200).send(newProduct);
     }
   } catch (err) {
-    req.logger.error(err);
+    log.error(err);
     res.status(500).send(
       `Error: ${err.name}
             Mensaje: ${err.message} 
@@ -85,7 +87,8 @@ export const updateProduct = async (req, res) => {
     const update = await productService.updateProduct(idProduct, updateProduct);
     res.status(200).send(update);
   } catch (error) {
-    req.logger.error(error);
+    log.error("Error al actualiza el producto", err);
+    res.status(500).json({ error: err.message });
   }
 };
 

@@ -1,6 +1,7 @@
 import * as cartService from "../services/cart.services.js";
 import * as ticketService from "../services/ticket.services.js";
 import { checkStocks, createTicket } from "../libs/cart.libs.js";
+import log from "../config/logs/devlogger.js";
 
 export const createCart = async (req, res) => {
   try {
@@ -21,7 +22,8 @@ export const getCarts = async (req, res) => {
     const carts = await cartService.getCarts();
     res.status(200).send(carts);
   } catch (err) {
-    req.logger.error("Error al obtener los productos", err);
+    log.error("Error al obtener los productos", err);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -43,7 +45,7 @@ export const getCartById = async (req, res) => {
     });
     res.status(200).render("cart", { products: newProducts });
   } catch (err) {
-    req.logger.error(err);
+    log.error(err);
   }
 };
 
@@ -64,7 +66,8 @@ export const addCartByPoductId = async (req, res) => {
     await cartService.getCompleteCart(cid);
     res.status(200).redirect("/products?limit=6");
   } catch (err) {
-    req.logger.error("Error agregar al carrito", err);
+    log.error("Error al agregar el producto al carrito", err);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -74,6 +77,7 @@ export const deleteAllProducts = async (req, res) => {
     await cartService.deleteProductsCart(cid);
     res.status(200).send("products removed");
   } catch (err) {
-    req.logger.error("Error al eliminar los productos del carrito", err);
+    log.error("Error al elemininar el producto", err);
+    res.status(500).json({ error: err.message });
   }
 };

@@ -2,16 +2,22 @@ import * as userService from "../services/user.services.js";
 import { isValidPassword, createHash } from "../utils.js";
 import { hasToken } from "../middlewares/user.middleware.js";
 import { generateToken } from "../libs/user.libs.js";
+import log from "../config/logs/devlogger.js";
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
+    if (!email || !password) {
+      req.logger.error("Falta completar datos");
+      return res.render("login", { message: "Faltan datos" });
+    }
     const user = await userService.getUser(email);
     if (!user) {
       req.logger.error("Usuario no encontrado");
-      res.render("login", { message: "User not found" });
+      return res.render("login", { message: "User not found" });
     }
     if (!isValidPassword(user, password)) {
+      req.logger.error("Password incorrecto");
       return res.render("login", { message: "Wrong password" });
     }
     delete user.password;
@@ -19,17 +25,22 @@ export const login = async (req, res) => {
     res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
     res.redirect("/products?limit=6");
   } catch (err) {
-    return req.logger.error(err.message, err);
+    log.error(err.message, err);
+    res.status(500).json({ error: err.message });
   }
 };
 
 export const registerUser = async (req, res) => {
   const { firstname, lastname, email, age, password } = req.body;
   try {
+    if (!firstname || !lastname || !email || !age || !password) {
+      req.logger.error("Faltan datos");
+      return res.render("register", { message: "Faltan datos" });
+    }
     let user = await userService.getUser(email);
     if (user) {
       req.logger.info("User registered");
-      res.render("login", { message: "User registered" });
+      return res.render("register", { message: "User registered" });
     }
     const newUser = {
       firstname,
@@ -41,7 +52,8 @@ export const registerUser = async (req, res) => {
     await userService.createUser(newUser);
     res.status(200).render("login");
   } catch (err) {
-    return req.logger.error("Register faild", err);
+    log.error("Register faild", err);
+    res.status(500).json({ error: err.message });
   }
 };
 

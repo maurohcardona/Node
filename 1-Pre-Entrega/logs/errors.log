@@ -13,3 +13,13 @@ error: Esto es un mensaje error
 error: Esto es un mensaje error
 error: Esto es un mensaje error
 fatal: Esto es un mensaje fatal
+error: undefined {"code":4,"name":"Error Product"}
+error: undefined {"code":4,"name":"Error Product"}
+error: Usuario no encontrado
+error: Cannot read properties of null (reading 'password') Cannot read properties of null (reading 'password') {"stack":"TypeError: Cannot read properties of null (reading 'password')\n    at isValidPassword (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/utils.js:30:86)\n    at login (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/Controllers/user.controller.js:15:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Cannot read properties of undefined (reading 'error') Cannot read properties of undefined (reading 'error') {"stack":"TypeError: Cannot read properties of undefined (reading 'error')\n    at login (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/Controllers/user.controller.js:11:15)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at Route.dispatch (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:114:3)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\index.js:284:15\n    at Function.process_params (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\index.js:47:12)"}
+error: Falta completar datos
+error: Usuario no encontrado
+error: Password incorrecto
+error: Faltan datos
+error: Faltan datos
