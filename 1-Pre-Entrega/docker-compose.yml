@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  bentica:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - monguito
+  monguito:
+    image: mongo
+    ports:
+      - "27017:27017"
