@@ -6,9 +6,8 @@ const mongodb = config.db.dbconnection;
 
 const conection = async () => {
   try {
-    const conn = await mongoose.connect(mongodb, {
-      dbName: "ecommerce",
-    });
+    const conn = await mongoose.connect(mongodb);
+
     log.http("Coneccion establecida correctamente: ");
   } catch (e) {
     log.error("Error: ", e);
