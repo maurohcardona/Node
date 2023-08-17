@@ -53,6 +53,7 @@ export const getProducts = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const { Title, Description, Price, Stock, Category, Thumbnail } = req.body;
+    const ownerEmail = req.user.rol === "admin" ? "admin" : req.user.email;
     if (!Stock || !Category || !Thumbnail || !Description || !Price || !Stock) {
       throw new errorProduct(
         "Falta completar datos del producto",
@@ -66,6 +67,7 @@ export const createProduct = async (req, res) => {
         Stock,
         Thumbnail,
         Category,
+        owner: ownerEmail,
       };
       await productService.createProduct(newProduct);
       res.status(200).send(newProduct);
@@ -83,12 +85,12 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const { idProduct } = req.params;
-    const updateProduct = req.body;
-    const update = await productService.updateProduct(idProduct, updateProduct);
+    const updateproduct = req.body;
+    const update = await productService.updateProduct(idProduct, updateproduct);
     res.status(200).send(update);
   } catch (error) {
-    log.error("Error al actualiza el producto", err);
-    res.status(500).json({ error: err.message });
+    log.error("Error al actualiza el producto", error);
+    res.status(500).json({ error: error.message });
   }
 };
 

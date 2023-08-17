@@ -11,13 +11,24 @@ import { handleSocketEvents } from "./Controllers/message.controller.js";
 import conection from "./config/db.config.js";
 import addlogger from "./middlewares/logger.middleware.js";
 import log from "./config/logs/devlogger.js";
+import exphbs from "express-handlebars";
+import handlebarsHelpers from "handlebars-helpers";
 
 const app = express();
+const hbs = exphbs.create({
+  helpers: {
+    eq: function (a, b, options) {
+      return a === b ? options.fn(this) : options.inverse(this);
+    },
+    // Otros helpers de handlebars-helpers también están disponibles aquí
+    ...handlebarsHelpers(),
+  },
+});
 
 const port = config.server.port;
 
 app.use(express.static(publics));
-app.engine("handlebars", engine());
+app.engine("handlebars", hbs.engine);
 app.set("views", __dirname + "/Views");
 app.set("view engine", "handlebars");
 
