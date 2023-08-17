@@ -3,15 +3,18 @@ import { generateProducts } from "../utils.js";
 import { errorProduct } from "../services/errors/customerror.js";
 import log from "../config/logs/devlogger.js";
 import Eerrors from "../services/errors/enums.js";
+import { getCartByUserId } from "../services/cart.services.js";
 
 export const getProducts = async (req, res) => {
   try {
+    const userId = req.user.id;
+    const cart = await getCartByUserId(userId);
     const { limit, category, sort } = req.query;
     const pages = req.query.page;
     const PAGE = pages ? pages : 1;
     const filter = category ? { Category: category } : {};
     const SORT = sort ? { Price: sort } : { Title: 1 };
-    const cid = req.user.cart;
+    const cid = cart ? cart._id : "";
     const products = await productService.getProducts(
       filter,
       PAGE,
@@ -33,7 +36,6 @@ export const getProducts = async (req, res) => {
         Category: data.Category,
         Thumbnail: data.Thumbnail,
         id: data._id,
-        cid,
       };
     });
     const { prevLink, nextLink, totalDocs, page } = products;
@@ -43,10 +45,11 @@ export const getProducts = async (req, res) => {
       totalDocs,
       prevLink,
       nextLink,
+      cid,
     });
   } catch (err) {
-    log.error("Error al obtener los productos", err);
-    res.status(500).json({ error: err.message });
+    log.error(err.message);
+    res.status(500).send("Error al obtener los productos");
   }
 };
 
@@ -89,15 +92,20 @@ export const updateProduct = async (req, res) => {
     const update = await productService.updateProduct(idProduct, updateproduct);
     res.status(200).send(update);
   } catch (error) {
-    log.error("Error al actualiza el producto", error);
-    res.status(500).json({ error: error.message });
+    log.error(error);
+    res.status(500).send("Error al actualiza el producto");
   }
 };
 
 export const deleteProduct = async (req, res) => {
-  const { idProduct } = req.params;
-  await productService.deleteProduct(idProduct);
-  res.status(200).send("Product deleted");
+  try {
+    const { idProduct } = req.params;
+    await productService.deleteProduct(idProduct);
+    res.status(200).send("Product deleted");
+  } catch (error) {
+    log.error(error);
+    res.status(500).send("No se pudo eliminar el producto");
+  }
 };
 
 export const createMockProduct = async (req, res) => {

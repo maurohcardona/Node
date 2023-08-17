@@ -1,5 +1,6 @@
 import * as userService from "../services/user.services.js";
 import { isValidPassword, createHash } from "../utils.js";
+import { getCartByUserId } from "../services/cart.services.js";
 
 import {
   generateToken,
@@ -29,8 +30,8 @@ export const login = async (req, res) => {
     res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
     res.redirect("/products?limit=6");
   } catch (err) {
-    log.error(err.message, err);
-    res.status(500).json({ error: err.message });
+    log.error(err.message);
+    res.status(500).send("Error al loguearse");
   }
 };
 
@@ -57,8 +58,8 @@ export const registerUser = async (req, res) => {
     await userService.createUser(newUser);
     res.status(200).render("login");
   } catch (err) {
-    log.error("Register faild", err);
-    res.status(500).json({ error: err.message });
+    log.error(err.message);
+    res.status(500).send('"Register faild"');
   }
 };
 
@@ -73,8 +74,14 @@ export const renderHome = (req, res) => res.render("home");
 
 export const renderRegister = (req, res) => res.render("register");
 
-export const current = (req, res) => {
-  res.render("profile", req.user);
+export const current = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const cart = await getCartByUserId(userId);
+    const cid = cart ? cart._id : "";
+    const profile = req.user;
+    res.render("profile", { profile, cid });
+  } catch (error) {}
 };
 
 export const register = (req, res) => {

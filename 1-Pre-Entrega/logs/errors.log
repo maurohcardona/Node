@@ -48,3 +48,36 @@ error: undefined {"_message":"products validation failed","errors":{"owner":{"ki
 error: Error al actualiza el producto Model.findByIdAndUpdate() no longer accepts a callback {"stack":"MongooseError: Model.findByIdAndUpdate() no longer accepts a callback\n    at Model.findByIdAndUpdate (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\mongoose\\lib\\model.js:2499:11)\n    at Module.updateProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/services/products.services.js:8:85)\n    at updateProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/Controllers/product.controller.js:88:41)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at isOwnerProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/middlewares/user.middleware.js:43:40)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/middlewares/user.middleware.js:11:14\n    at strategy.success (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\passport\\lib\\middleware\\authenticate.js:222:18)"}
 error: Error al actualiza el producto Model.findByIdAndUpdate() no longer accepts a callback {"stack":"MongooseError: Model.findByIdAndUpdate() no longer accepts a callback\n    at Model.findByIdAndUpdate (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\mongoose\\lib\\model.js:2499:11)\n    at Module.updateProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/services/products.services.js:8:85)\n    at updateProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/Controllers/product.controller.js:88:41)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at isOwnerProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/middlewares/user.middleware.js:43:40)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/middlewares/user.middleware.js:11:14\n    at strategy.success (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\passport\\lib\\middleware\\authenticate.js:222:18)"}
 error: Error al actualiza el producto Model.findByIdAndUpdate() no longer accepts a callback {"stack":"MongooseError: Model.findByIdAndUpdate() no longer accepts a callback\n    at Model.findByIdAndUpdate (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\mongoose\\lib\\model.js:2499:11)\n    at Module.updateProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/services/products.services.js:8:85)\n    at updateProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/Controllers/product.controller.js:88:41)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at isOwnerProduct (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/middlewares/user.middleware.js:44:40)\n    at Layer.handle [as handle_request] (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/middlewares/user.middleware.js:11:14\n    at strategy.success (C:\\Users\\mauro\\OneDrive\\Documentos\\Curso Backend\\Node\\1-Pre-Entrega\\node_modules\\passport\\lib\\middleware\\authenticate.js:222:18)"}
+error: Falta completar datos
+error: undefined
+error: cart is not defined
+error: cart is not defined
+error: Cannot read properties of undefined (reading 'cart')
+error: Cannot read properties of undefined (reading 'cart')
+error: Stock insuficiente en el producto Acondicionador Sólido Té Verde,Stock insuficiente en el producto Acondicionador sólido Aceite de Almendras
+error: Cannot read properties of undefined (reading 'cart')
+error: Cannot read properties of undefined (reading 'cart')
+error: Cannot set properties of undefined (setting 'cart')
+error: ticket is not defined
+error: cart is not defined
+error: Cannot set properties of undefined (setting 'cart')
+error: Cannot set properties of undefined (setting 'cart')
+error: Cannot set properties of undefined (setting 'cart')
+error: Cannot set properties of undefined (setting 'cart')
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"{ user: '64b9a5ca8c60201c0cc717fb' }\"","value":{"user":"64b9a5ca8c60201c0cc717fb"},"valueType":"Object"}
+error: undefined
+error: undefined
+error: userId is not defined
+error: ObjectId is not defined
+error: Cast to ObjectId failed for value "{ user: '64b9a5ca8c60201c0cc717fb' }" (type Object) at path "_id" for model "carts"
+error: Cast to ObjectId failed for value "{ user: '64b9a5ca8c60201c0cc717fb' }" (type Object) at path "_id" for model "carts"
+error: Cast to ObjectId failed for value "{ user: '64b9a5ca8c60201c0cc717fb' }" (type Object) at path "_id" for model "carts"
+error: undefined
+error: Cannot read properties of null (reading 'Cart')
+error: Cannot read properties of null (reading '_id')
+error: Cannot read properties of null (reading '_id')
+error: Cannot read properties of null (reading '_id')
+error: cid is not defined
+error: Cannot read properties of null (reading '_id')
+error: Cannot read properties of null (reading '_id')
+error: Cast to ObjectId failed for value "fffff" (type string) at path "_id" for model "carts"

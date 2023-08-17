@@ -13,17 +13,20 @@ export const createCart = async (req, res) => {
     await ticketService.createTicket(ticket);
     res.status(200).send("Cart created successfully");
   } catch (error) {
-    return res.status(500).send(error.message);
+    log.error(error.message);
+    return res.status(500).send("Fallo al crear el carrito");
   }
 };
+
+export const noCart = (req, res) => res.render("nocart");
 
 export const getCarts = async (req, res) => {
   try {
     const carts = await cartService.getCarts();
     res.status(200).send(carts);
   } catch (err) {
-    log.error("Error al obtener los productos", err);
-    res.status(500).json({ error: err.message });
+    log.error(err);
+    res.status(500).json("Error al obtener los productos");
   }
 };
 
@@ -45,7 +48,8 @@ export const getCartById = async (req, res) => {
     });
     res.status(200).render("cart", { products: newProducts });
   } catch (err) {
-    log.error(err);
+    log.error(err.message);
+    res.status(500).send("Error al traer el carrito");
   }
 };
 
@@ -66,8 +70,8 @@ export const addCartByPoductId = async (req, res) => {
     await cartService.getCompleteCart(cid);
     res.status(200).redirect("/products?limit=6");
   } catch (err) {
-    log.error("Error al agregar el producto al carrito", err);
-    res.status(500).json({ error: err.message });
+    log.error(err);
+    res.status(500).send('"Error al obtener los productos"');
   }
 };
 
@@ -77,7 +81,7 @@ export const deleteAllProducts = async (req, res) => {
     await cartService.deleteProductsCart(cid);
     res.status(200).send("products removed");
   } catch (err) {
-    log.error("Error al elemininar el producto", err);
-    res.status(500).json({ error: err.message });
+    log.error(err);
+    res.status(500).json("Error al elemininar el producto");
   }
 };

@@ -1,19 +1,25 @@
-import express from 'express';
-import { getCarts, addCartByPoductId, deleteAllProducts, getCartById, createCart } from '../Controllers/cart.controller.js';
+import express from "express";
+import {
+  getCarts,
+  addCartByPoductId,
+  deleteAllProducts,
+  getCartById,
+  createCart,
+  noCart,
+} from "../Controllers/cart.controller.js";
 
+const cartRouter = express.Router();
 
-const cartRouter = express.Router()
+cartRouter.post("/purchase", createCart);
 
-cartRouter.post('/purchase', createCart)
+cartRouter.get("/cart", noCart);
 
-cartRouter.get('/carts', getCarts)
+cartRouter.get("/carts", getCarts);
 
-cartRouter.get('/carts/:cid/products/:pid', addCartByPoductId)
+cartRouter.get("/carts/:cid/products/:pid", addCartByPoductId);
 
-cartRouter.delete('/api/carts/:cid', deleteAllProducts)
+cartRouter.delete("/api/carts/:cid", deleteAllProducts);
 
-cartRouter.get('/cart/:cid', getCartById);
-    
-
+cartRouter.get("/cart/:cid", getCartById);
 
 export default cartRouter;
