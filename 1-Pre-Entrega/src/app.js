@@ -2,8 +2,8 @@ import express from "express";
 import { __dirname, publics } from "./utils.js";
 import indexRouter from "./routes/index.routes.js";
 import { Server } from "socket.io";
-import { engine } from "express-handlebars";
 import passport from "passport";
+import { engine } from "express-handlebars";
 import initializePassport from "./config/passport.config.js";
 import cookieParser from "cookie-parser";
 import config from "./config/config.js";
@@ -11,24 +11,13 @@ import { handleSocketEvents } from "./Controllers/message.controller.js";
 import conection from "./config/db.config.js";
 import addlogger from "./middlewares/logger.middleware.js";
 import log from "./config/logs/devlogger.js";
-import exphbs from "express-handlebars";
-import handlebarsHelpers from "handlebars-helpers";
 
 const app = express();
-const hbs = exphbs.create({
-  helpers: {
-    eq: function (a, b, options) {
-      return a === b ? options.fn(this) : options.inverse(this);
-    },
-    // Otros helpers de handlebars-helpers también están disponibles aquí
-    ...handlebarsHelpers(),
-  },
-});
 
 const port = config.server.port;
 
 app.use(express.static(publics));
-app.engine("handlebars", hbs.engine);
+app.engine("handlebars", engine());
 app.set("views", __dirname + "/Views");
 app.set("view engine", "handlebars");
 
