@@ -1,0 +1,140 @@
+paths:
+  /carts/:
+    get:
+      summary: Obtiene todos los Carritos
+      tags:
+        - Carritos
+      responses:
+        "200":
+          description: Los carritos se obtuvieron satisfactoriamente
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#components/schemas/Carts"
+        "400":
+          description: "Usuario no autorizado"
+        "500":
+          description: "Error interno del servidor"
+  /purchase/:
+    post:
+      summary: Crea un nuevo carrito con productos dentro
+      tags:
+        - Carritos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/createCart"
+      responses:
+        "200":
+          description: Carrito creado satisfactoriamente
+        "500":
+          description: Error interno del servidor
+  /cart/{cid}:
+    get:
+      summary: Obtiene el carrito del Id seleccionado
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito a traer
+      responses:
+        "200":
+          description: carrito obtenido satisfactoriamente
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#components/schemas/Carts"
+        "400":
+          description: "Usuario no autorizado"
+        "500":
+          description: "Error interno del servidor"
+
+  /carts/{cid}/products/{pid}:
+    get:
+      summary: Agrega un producto determinado a un carrito especifico
+      tags:
+        - Carritos
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Id del producto a incluir
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito a al que se va a agregar el producto
+      responses:
+        "200":
+          description: Producto agregado satisfactoriamente al carrito seleccionado
+        "400":
+          description: "Usuario no autorizado"
+        "500":
+          description: "Error interno del servidor"
+  /api/carts/{cid}:
+    delete:
+      summary: Elimina todos los productos del carrito del Id seleccionado
+      tags:
+        - Carritos
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito del cual se quieren eliminar todos sus productos
+      responses:
+        "200":
+          description: Productos eliminados satisfactoriamente
+        "400":
+          description: "Usuario no autorizado"
+        "500":
+          description: "Error interno del servidor"
+
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        Cart:
+          type: Array
+          description: Productos que estan incluidos en el carrito
+        User:
+          type: ObjectId
+          description: Id del usuario al que le corresponde el usuario
+      example:
+        _id: ObjectId("64de902943060e819e030887")
+        Cart:
+          [
+            { cart: ObjectId("6493aabb658d23cd85c83c63"), quantity: 1 },
+            { cart: ObjectId("6493aabb658d23cd85c83c6a"), quantity: 2 },
+          ]
+        User: ObjectId("64b9a5ca8c60201c0cc717fb")
+
+  requestBodies:
+    createCart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        Cart:
+          type: Array
+          description: Productos que estan incluidos en el carrito
+        User:
+          type: ObjectId
+          description: Id del usuario al que le corresponde el usuario
+      example:
+        _id: ObjectId("64de902943060e819e030887")
+        Cart:
+          [
+            { cart: ObjectId("6493aabb658d23cd85c83c63"), quantity: 1 },
+            { cart: ObjectId("6493aabb658d23cd85c83c6a"), quantity: 2 },
+          ]
+        User: ObjectId("64b9a5ca8c60201c0cc717fb")

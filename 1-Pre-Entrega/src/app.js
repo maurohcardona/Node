@@ -11,6 +11,8 @@ import { handleSocketEvents } from "./Controllers/message.controller.js";
 import conection from "./config/db.config.js";
 import addlogger from "./middlewares/logger.middleware.js";
 import log from "./config/logs/devlogger.js";
+import swaggerUiExpress from "swagger-ui-express";
+import specs from "./config/docs.config.js";
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use(addlogger);
 initializePassport();
 app.use(passport.initialize());
 
+app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 app.use("/", indexRouter);
 
 export const httpServer = app.listen(port, () => {

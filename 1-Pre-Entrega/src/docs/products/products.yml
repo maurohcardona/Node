@@ -1,0 +1,151 @@
+paths:
+  /products/:
+    get:
+      summary: Obtiene todos los productos en paginas de hasta 6 productos a la vez
+      tags:
+        - Productos
+      responses:
+        "200":
+          description: Los productos se obtuvieron satisfactoriamente
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#components/schemas/Products"
+        "400":
+          description: "Usuario no autorizado"
+        "500":
+          description: "Error interno del servidor"
+    post:
+      summary: Crea un nuevo producto
+      tags:
+        - Productos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/createProduct"
+      responses:
+        "200":
+          description: Producto creado satisfactoriamente
+        "500":
+          description: Error interno del servidor
+  /products/{idProduct}:
+    put:
+      summary: Modifica un producto en base a al id del producto
+      tags:
+        - Productos
+      parameters:
+        - name: idProduct
+          in: path
+          required: true
+          description: Id del producto a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/createProduct"
+      responses:
+        "200":
+          description: Producto modificado satisfactoriamente
+        "500":
+          description: Error interno del servidor
+    delete:
+      summary: Elimina un producto en base a al id del producto
+      tags:
+        - Productos
+      parameters:
+        - name: idProduct
+          in: path
+          required: true
+          description: Id del producto a eliminar
+      responses:
+        "200":
+          description: Producto eliminado satisfactoriamente
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        Title:
+          type: String
+          description: Nombre del producto
+        Description:
+          type: String
+          description: Breve descripcion del producto
+        Price:
+          type: Number
+          description: Valor del producto en pesos argentinos
+        Thumbnail:
+          type: String
+          description: Imagen del producto
+        Code:
+          type: Number
+          description: Numero de Id asignado por el vendedor
+        Stock:
+          type: Number
+          description: Stock disponible del producto
+        Category:
+          type: String
+          description: Categoria a la que pertenece dicho producto
+        Owner:
+          type: String
+          description: Email del usuario que genero el producto
+      example:
+        _id: ObjectId("6493aabb658d23cd85c83c62")
+        Title: "Shampoo sólido Rosa Mosqueta"
+        Description: "Shampoo sólido Rosa Mosqueta"
+        Price: 800
+        Thumbnail: "https://res.cloudinary.com/dm3zt39cx/image/upload/v1666492990/Shampoo_…"
+        Stock: 84
+        Category: "Para cabellos secos"
+        Owner: maurohcardona@gmail.com
+
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        Title:
+          type: String
+          description: Nombre del producto
+        Description:
+          type: String
+          description: Breve descripcion del producto
+        Price:
+          type: Number
+          description: Valor del producto en pesos argentinos
+        Thumbnail:
+          type: String
+          description: Imagen del producto
+        Code:
+          type: Number
+          description: Numero de Id asignado por el vendedor
+        Stock:
+          type: Number
+          description: Stock disponible del producto
+        Category:
+          type: String
+          description: Categoria a la que pertenece dicho producto
+        Owner:
+          type: String
+          description: Email del usuario que genero el producto
+      example:
+        _id: ObjectId("6493aabb658d23cd85c83c62")
+        Title: "Shampoo sólido Rosa Mosqueta"
+        Description: "Shampoo sólido Rosa Mosqueta"
+        Price: 800
+        Thumbnail: "https://res.cloudinary.com/dm3zt39cx/image/upload/v1666492990/Shampoo_…"
+        Stock: 84
+        Category: "Para cabellos secos"
+        Owner: maurohcardona@gmail.com
