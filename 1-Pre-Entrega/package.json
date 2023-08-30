@@ -6,13 +6,15 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.js"
+    "start": "nodemon src/app.js",
+    "tests": "mocha src/Tests/**/*.test.js"
   },
   "author": "Mauro Cardona",
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
     "bcrypt": "^5.1.0",
+    "chai": "^4.3.8",
     "connect-mongo": "^5.0.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.1.4",
@@ -34,6 +36,7 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
-    "handlebars": "^4.5.0"
+    "handlebars": "^4.5.0",
+    "mocha": "^10.2.0"
   }
 }

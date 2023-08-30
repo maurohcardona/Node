@@ -9,6 +9,7 @@ config.server = {
 
 config.db = {
   dbconnection: process.env.DB,
+  dbtest: process.env.DB_TEST,
 };
 
 config.passport = {
