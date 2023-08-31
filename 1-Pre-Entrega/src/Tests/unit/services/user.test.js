@@ -7,7 +7,7 @@ import {
 } from "../../../services/user.services.js";
 import { expect, use } from "chai";
 import config from "../../../config/config.js";
-import { createHash, isValidPassword } from "../../../utils.js";
+import { createHash } from "../../../utils.js";
 
 const mongoDbTest = config.db.dbconnection;
 

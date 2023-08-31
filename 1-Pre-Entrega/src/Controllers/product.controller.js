@@ -21,6 +21,7 @@ export const getProducts = async (req, res) => {
       limit,
       SORT
     );
+    console.log(products)
     products.prevLink = products.hasPrevPage
       ? `http://localhost:8080/products?limit=6&page=${products.prevPage}`
       : "";
