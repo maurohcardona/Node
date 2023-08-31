@@ -16,6 +16,9 @@ export const updateProduct = async (idProduct, updateproduct) =>
 export const deleteProduct = async (idProduct) =>
   await productModel.findByIdAndRemove(idProduct);
 
+export const getProductByName = async (nameProduct) =>
+  await productModel.findOne({ Title: nameProduct });
+
 export const getProductById = async (idProduct) =>
   await productModel.findById(idProduct);
 
