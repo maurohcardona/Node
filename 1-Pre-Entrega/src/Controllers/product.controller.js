@@ -7,14 +7,14 @@ import { getCartByUserId } from "../services/cart.services.js";
 
 export const getProducts = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const cart = await getCartByUserId(userId);
+    //const userId = req.user.id;
+    //const cart = await getCartByUserId(userId);
     const { limit, category, sort } = req.query;
     const pages = req.query.page;
     const PAGE = pages ? pages : 1;
     const filter = category ? { Category: category } : {};
     const SORT = sort ? { Price: sort } : { Title: 1 };
-    const cid = cart ? cart._id : "";
+    //const cid = cart ? cart._id : "";
     const products = await productService.getProducts(
       filter,
       PAGE,
@@ -39,13 +39,15 @@ export const getProducts = async (req, res) => {
       };
     });
     const { prevLink, nextLink, totalDocs, page } = products;
-    res.status(200).render("realTimeProducts", {
+    //const emailUser = req.user.id;
+    res.status(200).send( {
       products: newProducts,
       page,
       totalDocs,
       prevLink,
       nextLink,
-      cid,
+      //cid,
+      //emailUser,
     });
   } catch (err) {
     log.error(err.message);

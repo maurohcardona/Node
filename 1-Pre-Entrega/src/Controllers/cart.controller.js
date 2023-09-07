@@ -14,11 +14,11 @@ export const createCart = async (req, res) => {
     res.status(200).send("Cart created successfully");
   } catch (error) {
     log.error(error.message);
-    return res.status(500).send("Fallo al crear el carrito");
+    return res.status(500).json("hola");
   }
 };
 
-export const noCart = (req, res) => res.render("nocart");
+export const noCart = (req, res) => res.render("cart");
 
 export const getCarts = async (req, res) => {
   try {

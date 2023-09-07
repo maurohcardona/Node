@@ -13,11 +13,13 @@ import addlogger from "./middlewares/logger.middleware.js";
 import log from "./config/logs/devlogger.js";
 import swaggerUiExpress from "swagger-ui-express";
 import specs from "./config/docs.config.js";
+import cors from 'cors'
 
 const app = express();
 
 const port = config.server.port;
 
+app.use(cors());
 app.use(express.static(publics));
 app.engine("handlebars", engine());
 app.set("views", __dirname + "/Views");
