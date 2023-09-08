@@ -28,7 +28,7 @@ export const login = async (req, res) => {
     delete user.password;
     const token = generateToken(user);
     res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
-    res.redirect("/products?limit=6");
+    res.status(200).send(user);
   } catch (err) {
     log.error(err.message);
     res.status(500).send("Error al loguearse");
