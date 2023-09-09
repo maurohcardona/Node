@@ -2,6 +2,7 @@ import express from "express";
 import passport from "passport";
 import * as usermanager from "../Controllers/user.controller.js";
 import { hasToken } from "../middlewares/user.middleware.js";
+import { uploader } from "../utils.js";
 
 const userRouter = express.Router();
 
@@ -19,7 +20,7 @@ userRouter.get("/login", usermanager.renderLogin);
 
 userRouter.post("/login", usermanager.login);
 
-userRouter.get("/logout", usermanager.logout);
+userRouter.get("/logout", hasToken("jwt"), usermanager.logout);
 
 userRouter.get("/recoverpass", usermanager.recoverpass);
 
@@ -47,4 +48,11 @@ userRouter.post(
   usermanager.resetPassword
 );
 
+userRouter.post(
+  "/api/users/:uid/documents",
+  uploader.single("file"),
+  usermanager.userDocuments
+);
+
+userRouter.get("/api/users/premium/:uid", usermanager.userToPremium);
 export default userRouter;

@@ -12,3 +12,23 @@ export const updatePassword = async (email, hashedPassword) =>
     { email: email },
     { $set: { password: hashedPassword } }
   );
+
+export const uploadDocument = async (uid, newDocument) =>
+  await userModel.updateOne(
+    { _id: uid },
+    { $push: { documents: newDocument } }
+  );
+
+export const toPremium = async (uid) =>
+  await userModel.updateOne({ _id: uid }, { $set: { rol: "premium" } });
+
+export const lastLogin = async (email) => {
+  await userModel.updateOne(
+    { email: email },
+    { $set: { lastLogin: Date.now() } }
+  );
+};
+
+export const lastLogout = async (uid) => {
+  await userModel.updateOne({ _id: uid }, { $set: { lastLogout: Date.now() } });
+};

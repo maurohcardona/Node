@@ -207,3 +207,9 @@ error: Cannot read properties of undefined (reading 'id')
 error: Cannot read properties of undefined (reading 'id')
 error: cid is not defined
 error: Falta completar datos
+error: Password incorrecto
+error: email is not defined
+error: Cast to date failed for value "[Function: now]" (type function) at path "lastLogin"
+error: Cast to date failed for value "[Function: now]" (type function) at path "lastLogin"
+error: Cast to date failed for value "[Function: now]" (type function) at path "lastLogin"
+error: Falta completar datos

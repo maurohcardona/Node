@@ -27,6 +27,7 @@ export const login = async (req, res) => {
     }
     delete user.password;
     const token = generateToken(user);
+    await userService.lastLogin(email);
     res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
     res.redirect("/products?limit=6");
   } catch (err) {
@@ -65,7 +66,8 @@ export const registerUser = async (req, res) => {
 
 export const recoverpass = (req, res) => res.render("recoverpass");
 
-export const logout = (req, res) => {
+export const logout = async (req, res) => {
+  await userService.lastLogout(req.user.id);
   res.clearCookie("cookieToken");
   res.redirect("/login");
 };
@@ -166,5 +168,52 @@ export const resetPassword = async (req, res) => {
   } catch (error) {
     log.error(error);
     res.status(500).send("Error al cambiar la contrasena");
+  }
+};
+
+export const userDocuments = async (req, res) => {
+  const { uid } = req.params;
+  try {
+    if (!req.file) {
+      log.error("No se pudo cargar la imagen");
+      return res.status(400).send({ error: "No se pudo cargar el documento" });
+    }
+    //console.log(req.file);
+
+    const newDocument = {
+      name: req.file.originalname,
+      reference: req.file.path,
+    };
+    await userService.uploadDocument(uid, newDocument);
+    res.status(200).send("Document upload sussesfully");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const userToPremium = async (req, res) => {
+  const { uid } = req.params;
+
+  try {
+    const user = await userService.getUserById(uid);
+    const nombresAB = [
+      "Identificacion",
+      "Comprobante de domicilio",
+      "Comprobante de cuenta",
+    ];
+    const todosPresentes = nombresAB.every((nombre) =>
+      user.documents.some((objeto) => objeto.name === nombre)
+    );
+    if (todosPresentes) {
+      await userService.toPremium(uid);
+      return res
+        .status(200)
+        .send("Toda la documentacion fue cargado con exito");
+    } else {
+      return res.status(400).send("No ha cargado toda la documentacion");
+    }
+  } catch (error) {
+    log.error("error");
+    return res.status(500).send("Error al subir la documentacion");
   }
 };
