@@ -15,7 +15,7 @@ import {
 
 const productRouter = express.Router();
 
-productRouter.get("/", hasToken("jwt"), getProducts);
+productRouter.get("/", getProducts);
 
 productRouter.post("/", hasToken("jwt"), isPremium("jwt"), createProduct);
 
