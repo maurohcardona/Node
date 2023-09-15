@@ -22,10 +22,10 @@ export const getProducts = async (req, res) => {
       SORT
     );
     products.prevLink = products.hasPrevPage
-      ? `http://localhost:8080/products?limit=6&page=${products.prevPage}`
+      ? `http://localhost:8080/products?limit=10&page=${products.prevPage}`
       : "";
     products.nextLink = products.hasNextPage
-      ? `http://localhost:8080/products?limit=6&page=${products.nextPage}`
+      ? `http://localhost:8080/products?limit=10&page=${products.nextPage}`
       : "";
     const newProducts = products.docs.map((data) => {
       return {

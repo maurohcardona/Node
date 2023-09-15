@@ -27,7 +27,7 @@ export const login = async (req, res) => {
     }
     delete user.password;
     const token = generateToken(user);
-    res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
+    res.cookie("cookieToken", token, { maxAge: 3600000 });
     res.status(200).send(user);
   } catch (err) {
     log.error(err.message);
@@ -67,7 +67,6 @@ export const recoverpass = (req, res) => res.render("recoverpass");
 
 export const logout = (req, res) => {
   res.clearCookie("cookieToken");
-  res.redirect("/login");
 };
 
 export const renderHome = (req, res) => res.render("home");
@@ -97,7 +96,7 @@ export const renderLogin = (req, res) => res.render("login");
 
 export const githubToken = (req, res) => {
   const token = req.user;
-  res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
+  res.cookie("cookieToken", token, { maxAge: 3600000 });
   res.redirect("/products?limit=6");
 };
 

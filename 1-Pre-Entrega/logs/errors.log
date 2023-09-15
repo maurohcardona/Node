@@ -239,3 +239,4 @@ error: Cannot read properties of undefined (reading 'id')
 error: Password incorrecto
 error: Cannot read properties of undefined (reading 'id')
 error: Cannot read properties of undefined (reading 'id')
+error: tue is not defined
