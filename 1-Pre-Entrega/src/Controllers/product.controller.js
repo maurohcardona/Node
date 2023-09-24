@@ -22,10 +22,10 @@ export const getProducts = async (req, res) => {
       SORT
     );
     products.prevLink = products.hasPrevPage
-      ? `http://localhost:8080/products?limit=10&page=${products.prevPage}`
+      ? `http://localhost:8080/products?limit=5&page=${products.prevPage}`
       : "";
     products.nextLink = products.hasNextPage
-      ? `http://localhost:8080/products?limit=10&page=${products.nextPage}`
+      ? `http://localhost:8080/products?limit=5&page=${products.nextPage}`
       : "";
     const newProducts = products.docs.map((data) => {
       return {
@@ -116,4 +116,12 @@ export const createMockProduct = async (req, res) => {
     users.push(generateProducts());
   }
   res.status(200).send(users);
+};
+
+export const getProductById = async (req, res) => {
+  const { idProduct } = req.params;
+
+  const product = await productService.getProductById(idProduct);
+
+  res.status(200).send(product);
 };

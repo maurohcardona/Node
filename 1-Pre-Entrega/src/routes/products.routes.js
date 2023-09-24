@@ -11,11 +11,14 @@ import {
   updateProduct,
   deleteProduct,
   createMockProduct,
+  getProductById,
 } from "../Controllers/product.controller.js";
 
 const productRouter = express.Router();
 
 productRouter.get("/", hasToken("jwt"), getProducts);
+
+productRouter.get("/:idProduct", hasToken("jwt"), getProductById);
 
 productRouter.post("/", hasToken("jwt"), isPremium("jwt"), createProduct);
 

@@ -14,7 +14,7 @@ cartRouter.post("/purchase", createCart);
 
 cartRouter.get("/cart", noCart);
 
-cartRouter.get("/carts", getCarts);
+cartRouter.get("/cartss/:userId", getCarts);
 
 cartRouter.get("/carts/:cid/products/:pid", addCartByPoductId);
 

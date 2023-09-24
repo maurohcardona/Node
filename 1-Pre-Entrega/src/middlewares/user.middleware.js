@@ -1,15 +1,21 @@
 import passport from "passport";
 import * as productServices from "../services/products.services.js";
+import log from "../config/logs/devlogger.js";
 
 export const hasToken = (strategy) => {
   return async (req, res, next) => {
-    passport.authenticate(strategy, function (err, user, info) {
-      if (!user) {
-        return res.redirect("/login");
-      }
-      req.user = user;
-      return next();
-    })(req, res, next);
+    try {
+      passport.authenticate(strategy, function (err, user, info) {
+        if (!user) {
+          return res.status(404).json("Usuario no autenticado");
+        }
+        req.user = user;
+        return next();
+      })(req, res, next);
+    } catch (error) {
+      log.error(error.message);
+      res.status(400).send(error.message);
+    }
   };
 };
 

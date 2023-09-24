@@ -22,7 +22,9 @@ export const noCart = (req, res) => res.render("cart");
 
 export const getCarts = async (req, res) => {
   try {
-    const carts = await cartService.getCarts();
+    const userId = req.params.userId;
+    const carts = await cartService.getCompleteCart(userId);
+
     res.status(200).send(carts);
   } catch (err) {
     log.error(err);
@@ -37,10 +39,10 @@ export const getCartById = async (req, res) => {
     const newProducts = cart.Cart.map((data) => {
       return {
         Title: data.cart.Title,
-        Description: data.cart.Description,
+        //Description: data.cart.Description,
         Price: data.cart.Price,
-        Stock: data.cart.Stock,
-        Category: data.cart.Category,
+        //Stock: data.cart.Stock,
+        //Category: data.cart.Category,
         Thumbnail: data.cart.Thumbnail,
         id: data.cart._id,
         quantity: data.quantity,

@@ -76,6 +76,7 @@ const initializePassport = () => {
       },
       async (jwt_payload, done) => {
         try {
+          console.log(jwt_payload);
           return done(null, jwt_payload);
         } catch (error) {
           return done(error);

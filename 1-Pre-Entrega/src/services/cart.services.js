@@ -2,12 +2,13 @@ import cartModel from "../models/carts.js";
 
 export const createCart = async (newCart) => await cartModel.create(newCart);
 
-export const getCarts = async () => await cartModel.find({}).lean();
+export const getCarts = async (userId) =>
+  await cartModel.findMany({ _id: email });
 
 export const getCartById = async (id) => await cartModel.findById(id);
 
-export const getCartByUserId = async (id) =>
-  await cartModel.findOne({ user: id });
+export const getCartByUserId = async (userId) =>
+  await cartModel.find({ user: userId });
 
 export const addCartByProductId = async (cid, pid) =>
   await cartModel.updateOne({ _id: cid }, { $push: { products: pid } });
@@ -26,8 +27,8 @@ export const deleteProductsCart = async (cid) =>
     { new: true }
   );
 
-export const getCompleteCart = async (cid) =>
-  await cartModel.findOne({ _id: cid }).populate("Cart.cart");
+export const getCompleteCart = async (userId) =>
+  await cartModel.find({ user: userId }).populate("Cart.cart");
 
 export const addOnlyQuantity = async (cid, pid, quantity) => {
   try {
