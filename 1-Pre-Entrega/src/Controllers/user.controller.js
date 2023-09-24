@@ -171,16 +171,15 @@ export const resetPassword = async (req, res) => {
 };
 
 export const userDocuments = async (req, res) => {
-  const { uid } = req.params;
+  const { uid, ident } = req.params;
   try {
     if (!req.file) {
       log.error("No se pudo cargar la imagen");
       return res.status(400).send({ error: "No se pudo cargar el documento" });
     }
-    //console.log(req.file);
 
     const newDocument = {
-      name: req.file.originalname,
+      name: ident,
       reference: req.file.path,
     };
     await userService.uploadDocument(uid, newDocument);

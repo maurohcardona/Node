@@ -13,11 +13,12 @@ export const updatePassword = async (email, hashedPassword) =>
     { $set: { password: hashedPassword } }
   );
 
-export const uploadDocument = async (uid, newDocument) =>
+export const uploadDocument = async (uid, newDocument) => {
   await userModel.updateOne(
     { _id: uid },
     { $push: { documents: newDocument } }
   );
+};
 
 export const toPremium = async (uid) =>
   await userModel.updateOne({ _id: uid }, { $set: { rol: "premium" } });
