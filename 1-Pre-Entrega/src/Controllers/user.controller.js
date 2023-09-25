@@ -80,7 +80,6 @@ export const current = async (req, res) => {
     const cid = cart ? cart._id : "";
     const profile = await userService.getUser(req.user.email);
     delete profile.password;
-    console.log(profile);
     res.status(200).json({ profile, cid });
   } catch (error) {}
 };
@@ -171,16 +170,20 @@ export const resetPassword = async (req, res) => {
 };
 
 export const userDocuments = async (req, res) => {
-  const { uid, ident } = req.params;
+  const { uid, direct, ident } = req.params;
   try {
     if (!req.file) {
       log.error("No se pudo cargar la imagen");
       return res.status(400).send({ error: "No se pudo cargar el documento" });
     }
+    console.log("uid: " + uid);
+    console.log("direct: " + direct);
+    console.log("ident: " + ident);
 
     const newDocument = {
       name: ident,
       reference: req.file.path,
+      path: `http://localhost:8080/uploads/${direct}/${req.file.filename}`,
     };
     await userService.uploadDocument(uid, newDocument);
     res.status(200).send("Document upload sussesfully");

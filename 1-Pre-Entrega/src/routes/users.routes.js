@@ -49,7 +49,7 @@ userRouter.post(
 );
 
 userRouter.post(
-  "/api/users/:uid/documents/:ident",
+  "/api/users/:uid/documents/:direct/:ident",
   uploader.single("file"),
   usermanager.userDocuments
 );

@@ -17,6 +17,7 @@ const schema = new mongoose.Schema({
       {
         name: String,
         reference: String,
+        path: String,
       },
     ],
   },

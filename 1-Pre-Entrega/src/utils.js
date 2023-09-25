@@ -10,7 +10,8 @@ export const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `${__dirname}/Public/uploads`);
+    const { direct } = req.params;
+    cb(null, `${__dirname}/Public/uploads/${direct}`);
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`);
