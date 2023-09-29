@@ -14,8 +14,12 @@ import log from "./config/logs/devlogger.js";
 import swaggerUiExpress from "swagger-ui-express";
 import specs from "./config/docs.config.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
+
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 const port = config.server.port;
 app.use(cookieParser());

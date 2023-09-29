@@ -22,9 +22,12 @@ export const getProductByName = async (nameProduct) =>
 export const getProductById = async (idProduct) =>
   await productModel.findById(idProduct);
 
-export const updateStock = async (pid, quantity) =>
+export const updateStock = async (pid, quantity) => {
+  console.log(quantity);
+
   await productModel.updateOne(
     { _id: pid },
     { $inc: { Stock: -quantity } },
     { new: true }
   );
+};

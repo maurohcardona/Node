@@ -373,3 +373,35 @@ error: No se pudo cargar la imagen
 error: No se pudo cargar la imagen
 error: No se pudo cargar la imagen
 error: No se pudo cargar la imagen
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: carts validation failed: user: Path `user` is required.
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: carts validation failed: user: Path `user` is required.
+error: carts validation failed: user: Path `user` is required.
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Cannot set headers after they are sent to the client
+error: ok is not defined

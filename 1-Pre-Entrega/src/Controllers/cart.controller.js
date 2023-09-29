@@ -5,16 +5,20 @@ import log from "../config/logs/devlogger.js";
 
 export const createCart = async (req, res) => {
   try {
-    const newCart = req.body;
-    const hasStock = await checkStocks(newCart.Cart);
-    if (hasStock !== "ok") throw new Error(hasStock);
-    await cartService.createCart(newCart);
-    const ticket = await createTicket(newCart);
-    await ticketService.createTicket(ticket);
+    const cart = req.body;
+    const hasStock = await checkStocks(cart);
+    console.log(hasStock);
+    if (hasStock !== "ok") {
+      return res.status(400).send(hasStock);
+    }
+    // if (hasStock.length >= 1) throw new Error(hasStock);
+    // await cartService.createCart(newCart);
+    // const ticket = await createTicket(newCart);
+    // await ticketService.createTicket(ticket);
     res.status(200).send("Cart created successfully");
   } catch (error) {
     log.error(error.message);
-    return res.status(500).json("hola");
+    return res.status(500).json(error);
   }
 };
 
