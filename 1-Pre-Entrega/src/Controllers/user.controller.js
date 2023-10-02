@@ -6,6 +6,7 @@ import {
   generateToken,
   sendRecoveryPassword,
   validateToken,
+  sendUserDeleted,
 } from "../libs/user.libs.js";
 import log from "../config/logs/devlogger.js";
 
@@ -14,30 +15,38 @@ export const login = async (req, res) => {
   try {
     if (!email || !password) {
       req.logger.error("Falta completar datos");
-      return res.render("login", { message: "Faltan datos" });
+      return res.status(401).json("Faltan datos");
     }
-    const user = await userService.getUser(email);
-    if (!user) {
+    const userComplete = await userService.getUser(email);
+
+    if (!userComplete) {
       req.logger.error("Usuario no encontrado");
-      return res.render("login", { message: "User not found" });
+      return res.status(401).json("Usuario o Password invalidos");
     }
-    if (!isValidPassword(user, password)) {
+    if (!isValidPassword(userComplete, password)) {
       req.logger.error("Password incorrecto");
-      return res.render("login", { message: "Wrong password" });
+      return res.status(401).json("Usuario o contrasena invalidos");
     }
-    delete user.password;
+    if (userComplete.status === false) {
+      req.logger.error("Usuario suspendido");
+      return res.status(401).json("Usuario suspendido");
+    }
+    const user = {
+      id: userComplete._id,
+      email: userComplete.email,
+      rol: userComplete.rol,
+    };
     const token = generateToken(user);
-    await userService.lastLogin(email);
-    res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
-    res.redirect("/products?limit=6");
+    res.cookie("cookieToken", token, { maxAge: 3600000 });
+    res.status(200).send(user);
   } catch (err) {
     log.error(err.message);
-    res.status(500).send("Error al loguearse");
+    res.status(400).send(err.message);
   }
 };
 
 export const registerUser = async (req, res) => {
-  const { firstname, lastname, email, age, password, rol } = req.body;
+  const { firstname, lastname, email, age, password } = req.body;
   try {
     if (!firstname || !lastname || !email || !age || !password) {
       req.logger.error("Faltan datos");
@@ -54,10 +63,9 @@ export const registerUser = async (req, res) => {
       email,
       age,
       password: createHash(password),
-      rol,
     };
     await userService.createUser(newUser);
-    res.status(200).render("login");
+    res.status(200).send("Usuario creado");
   } catch (err) {
     log.error(err.message);
     res.status(500).send('"Register faild"');
@@ -69,7 +77,7 @@ export const recoverpass = (req, res) => res.render("recoverpass");
 export const logout = async (req, res) => {
   await userService.lastLogout(req.user.id);
   res.clearCookie("cookieToken");
-  res.redirect("/login");
+  res.status(200).send("Usuario deslogueado exitosamente");
 };
 
 export const renderHome = (req, res) => res.render("home");
@@ -81,8 +89,9 @@ export const current = async (req, res) => {
     const userId = req.user.id;
     const cart = await getCartByUserId(userId);
     const cid = cart ? cart._id : "";
-    const profile = req.user;
-    res.render("profile", { profile, cid });
+    const profile = await userService.getUser(req.user.email);
+    delete profile.password;
+    res.status(200).json({ profile, cid });
   } catch (error) {}
 };
 
@@ -99,7 +108,7 @@ export const renderLogin = (req, res) => res.render("login");
 
 export const githubToken = (req, res) => {
   const token = req.user;
-  res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
+  res.cookie("cookieToken", token, { maxAge: 3600000 });
   res.redirect("/products?limit=6");
 };
 
@@ -172,17 +181,20 @@ export const resetPassword = async (req, res) => {
 };
 
 export const userDocuments = async (req, res) => {
-  const { uid } = req.params;
+  const { uid, direct, ident } = req.params;
   try {
     if (!req.file) {
       log.error("No se pudo cargar la imagen");
       return res.status(400).send({ error: "No se pudo cargar el documento" });
     }
-    //console.log(req.file);
+    console.log("uid: " + uid);
+    console.log("direct: " + direct);
+    console.log("ident: " + ident);
 
     const newDocument = {
-      name: req.file.originalname,
+      name: ident,
       reference: req.file.path,
+      path: `http://localhost:8080/uploads/${direct}/${req.file.filename}`,
     };
     await userService.uploadDocument(uid, newDocument);
     res.status(200).send("Document upload sussesfully");
@@ -215,5 +227,26 @@ export const userToPremium = async (req, res) => {
   } catch (error) {
     log.error("error");
     return res.status(500).send("Error al subir la documentacion");
+  }
+};
+
+export const allUsers = async (req, res) => {
+  try {
+    const users = await userService.getUsers();
+    return res.status(200).send({ users });
+  } catch (error) {
+    log.error(error);
+    return res.status(500).send("No se pudieron obtener los usuarios");
+  }
+};
+
+export const deleteUsers = async (req, res) => {
+  try {
+    const users = await userService.updatedUsers();
+    await userService.deleteUsers();
+    sendUserDeleted(users);
+    return res.status(200).send({ users });
+  } catch (error) {
+    return res.status(500).send("No se pudieron eliminar los usuarios");
   }
 };

@@ -207,9 +207,1316 @@ error: Cannot read properties of undefined (reading 'id')
 error: Cannot read properties of undefined (reading 'id')
 error: cid is not defined
 error: Falta completar datos
-error: Password incorrecto
-error: email is not defined
-error: Cast to date failed for value "[Function: now]" (type function) at path "lastLogin"
-error: Cast to date failed for value "[Function: now]" (type function) at path "lastLogin"
-error: Cast to date failed for value "[Function: now]" (type function) at path "lastLogin"
 error: Falta completar datos
+error: Falta completar datos
+error: Falta completar datos
+error: Falta completar datos
+error: Falta completar datos
+error: Falta completar datos
+error: Invalid status code: Login succesus
+error: res.Cookie is not a function
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: cart is not defined
+error: cart is not defined
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: Password incorrecto
+error: Cannot read properties of undefined (reading 'id')
+error: Cannot read properties of undefined (reading 'id')
+error: tue is not defined
+error: Stock insuficiente en el producto Bálsamo labial reparación intesiva
+error: Stock insuficiente en el producto Bálsamo labial reparación intesiva
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"64de8dd8f99904cffb89\"","value":"64de8dd8f99904cffb89","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: Password incorrecto
+error: Password incorrecto
+error: Invalid status code: login
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Falta completar datos
+error: Falta completar datos
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Usuario no encontrado
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Usuario no encontrado
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Usuario no autenticado
+error: Usuario no autenticado
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Usuario no encontrado
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Usuario no encontrado
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Password incorrecto
+error: Usuario no encontrado
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: No se pudo cargar la imagen
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: Cast to ObjectId failed for value "pagos" (type string) at path "user" for model "carts"
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: carts validation failed: user: Path `user` is required.
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"user","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+error: carts validation failed: user: Path `user` is required.
+error: carts validation failed: user: Path `user` is required.
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Cannot read properties of undefined (reading 'map')
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Stock insuficiente en el producto Cabellos y barba-barra sólida de limpieza
+error: Cannot set headers after they are sent to the client
+error: ok is not defined
+error: data and hash arguments required
+error: data and hash arguments required
+error: data and hash arguments required
+error: data and hash arguments required
+error: data and hash arguments required
+error: userComplete is not defined
+error: crossOriginIsolated is not defined
+error: Error al enviar el mail
+error: Password incorrecto
+error: Usuario suspendido
+error: Cannot read properties of null (reading '_id')
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Error al enviar el mail
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"code":4,"name":"Error Product"}
+error: undefined
+error: undefined
+error: Faltan datos
+error: Cannot read properties of null (reading '_id')
+error: Faltan datos
+error: Faltan datos
+error: Faltan datos
+error: Cannot read properties of null (reading '_id')
+error: rol is not defined
+error: rol is not defined
+error: Faltan datos
+error: Cannot read properties of null (reading '_id')
+error: Faltan datos
+error: Cannot read properties of null (reading '_id')
+error: Cannot read properties of null (reading '_id')
+error: Cannot read properties of null (reading 'status')
+error: Usuario no encontrado
+error: Usuario no encontrado

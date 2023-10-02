@@ -17,11 +17,13 @@ const schema = new mongoose.Schema({
       {
         name: String,
         reference: String,
+        path: String,
       },
     ],
   },
   lastLogin: Date,
   lastLogout: Date,
+  status: Boolean,
 });
 
 const userModel = new mongoose.model(collection, schema);

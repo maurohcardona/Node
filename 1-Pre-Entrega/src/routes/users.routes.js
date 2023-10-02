@@ -8,6 +8,10 @@ const userRouter = express.Router();
 
 userRouter.get("/", usermanager.renderHome);
 
+userRouter.get("/api/users", usermanager.allUsers);
+
+userRouter.put("/api/users", usermanager.deleteUsers);
+
 userRouter.get("/register", usermanager.renderRegister);
 
 userRouter.get("/current", hasToken("jwt"), usermanager.current);
@@ -49,10 +53,11 @@ userRouter.post(
 );
 
 userRouter.post(
-  "/api/users/:uid/documents",
+  "/api/users/:uid/documents/:direct/:ident",
   uploader.single("file"),
   usermanager.userDocuments
 );
 
 userRouter.get("/api/users/premium/:uid", usermanager.userToPremium);
+
 export default userRouter;

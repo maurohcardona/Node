@@ -5,16 +5,20 @@ import log from "../config/logs/devlogger.js";
 
 export const createCart = async (req, res) => {
   try {
-    const newCart = req.body;
-    const hasStock = await checkStocks(newCart.Cart);
-    if (hasStock !== "ok") throw new Error(hasStock);
-    await cartService.createCart(newCart);
-    const ticket = await createTicket(newCart);
-    await ticketService.createTicket(ticket);
+    const cart = req.body;
+    const hasStock = await checkStocks(cart);
+    console.log(hasStock);
+    if (hasStock !== "ok") {
+      return res.status(400).send(hasStock);
+    }
+    // if (hasStock.length >= 1) throw new Error(hasStock);
+    // await cartService.createCart(newCart);
+    // const ticket = await createTicket(newCart);
+    // await ticketService.createTicket(ticket);
     res.status(200).send("Cart created successfully");
   } catch (error) {
     log.error(error.message);
-    return res.status(500).json("hola");
+    return res.status(500).json(error);
   }
 };
 
@@ -22,7 +26,9 @@ export const noCart = (req, res) => res.render("cart");
 
 export const getCarts = async (req, res) => {
   try {
-    const carts = await cartService.getCarts();
+    const userId = req.params.userId;
+    const carts = await cartService.getCompleteCart(userId);
+
     res.status(200).send(carts);
   } catch (err) {
     log.error(err);
@@ -37,10 +43,10 @@ export const getCartById = async (req, res) => {
     const newProducts = cart.Cart.map((data) => {
       return {
         Title: data.cart.Title,
-        Description: data.cart.Description,
+        //Description: data.cart.Description,
         Price: data.cart.Price,
-        Stock: data.cart.Stock,
-        Category: data.cart.Category,
+        //Stock: data.cart.Stock,
+        //Category: data.cart.Category,
         Thumbnail: data.cart.Thumbnail,
         id: data.cart._id,
         quantity: data.quantity,

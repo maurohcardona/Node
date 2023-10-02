@@ -13,13 +13,22 @@ import addlogger from "./middlewares/logger.middleware.js";
 import log from "./config/logs/devlogger.js";
 import swaggerUiExpress from "swagger-ui-express";
 import specs from "./config/docs.config.js";
-import cors from 'cors'
+import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
 
-const port = config.server.port;
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
-app.use(cors());
+const port = config.server.port;
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(express.static(publics));
 app.engine("handlebars", engine());
 app.set("views", __dirname + "/Views");
@@ -27,7 +36,7 @@ app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
 app.use(addlogger);
 
 initializePassport();

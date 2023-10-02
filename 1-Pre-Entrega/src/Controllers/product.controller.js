@@ -3,18 +3,34 @@ import { generateProducts } from "../utils.js";
 import { errorProduct } from "../services/errors/customerror.js";
 import log from "../config/logs/devlogger.js";
 import Eerrors from "../services/errors/enums.js";
-import { getCartByUserId } from "../services/cart.services.js";
+import { getUser } from "../services/user.services.js";
+import { sendProductDeleted } from "../libs/user.libs.js";
+
+export const getAllProducts = async (req, res) => {
+  try {
+    const result = await productService.getAllProducts();
+    const products = result.map((data) => {
+      return {
+        Title: data.Title,
+        id: data._id,
+        status: data.status,
+      };
+    });
+    res.status(200).send(products);
+  } catch (error) {
+    log.error(error.message);
+    res.status(500).send("Error al obtener los productos");
+  }
+};
 
 export const getProducts = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const cart = await getCartByUserId(userId);
     const { limit, category, sort } = req.query;
     const pages = req.query.page;
     const PAGE = pages ? pages : 1;
     const filter = category ? { Category: category } : {};
     const SORT = sort ? { Price: sort } : { Title: 1 };
-    const cid = cart ? cart._id : "";
+
     const products = await productService.getProducts(
       filter,
       PAGE,
@@ -22,32 +38,32 @@ export const getProducts = async (req, res) => {
       SORT
     );
     products.prevLink = products.hasPrevPage
-      ? `http://localhost:8080/products?limit=6&page=${products.prevPage}`
+      ? `http://localhost:8080/products?limit=5&page=${products.prevPage}`
       : "";
     products.nextLink = products.hasNextPage
-      ? `http://localhost:8080/products?limit=6&page=${products.nextPage}`
+      ? `http://localhost:8080/products?limit=5&page=${products.nextPage}`
       : "";
-    const newProducts = products.docs.map((data) => {
-      return {
-        Title: data.Title,
-        Description: data.Description,
-        Price: data.Price,
-        Stock: data.Stock,
-        Category: data.Category,
-        Thumbnail: data.Thumbnail,
-        id: data._id,
-      };
-    });
+    const newProducts = products.docs
+      .filter((data) => data.status)
+      .map((data) => {
+        return {
+          Title: data.Title,
+          Description: data.Description,
+          Price: data.Price,
+          Stock: data.Stock,
+          Category: data.Category,
+          Thumbnail: data.Thumbnail,
+          id: data._id,
+        };
+      });
     const { prevLink, nextLink, totalDocs, page } = products;
-    const emailUser = req.user.id;
-    res.status(200).render("realTimeProducts", {
+
+    res.status(200).json({
       products: newProducts,
       page,
       totalDocs,
       prevLink,
       nextLink,
-      cid,
-      emailUser,
     });
   } catch (err) {
     log.error(err.message);
@@ -75,7 +91,7 @@ export const createProduct = async (req, res) => {
         owner: ownerEmail,
       };
       await productService.createProduct(newProduct);
-      res.status(200).send(newProduct);
+      res.status(200).send("Producto creado");
     }
   } catch (err) {
     log.error(err);
@@ -102,6 +118,11 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   try {
     const { idProduct } = req.params;
+    const product = await productService.getProductById(idProduct);
+    const user = await getUser(product.owner);
+    // if (user.rol === "premium") {
+    //   sendProductDeleted(product.owner, product.Title);
+    // }
     await productService.deleteProduct(idProduct);
     res.status(200).send("Product deleted");
   } catch (error) {
@@ -116,4 +137,18 @@ export const createMockProduct = async (req, res) => {
     users.push(generateProducts());
   }
   res.status(200).send(users);
+};
+
+export const getProductById = async (req, res) => {
+  const { idProduct } = req.params;
+
+  const product = await productService.getProductById(idProduct);
+
+  res.status(200).send(product);
+};
+
+export const hola = async (req, res) => {
+  console.log("hola");
+  await productService.toTrue();
+  res.status(200).send("actualizados todos los productos");
 };
