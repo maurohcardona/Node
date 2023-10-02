@@ -30,7 +30,7 @@ export const createOrder = async (req, res) => {
       pending: "http://localhost:8080/pagos/pending",
     },
 
-    notification_url: `https://92d5-186-148-207-242.ngrok.io/pagos/${id}/webhook`,
+    notification_url: `https://281c-186-152-163-130.ngrok.io/pagos/${id}/webhook`,
     statement_descriptor: "maurohcardona@gmail.com",
     additional_info: "maurohcardona@gmail.com",
   });

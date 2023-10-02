@@ -6,6 +6,7 @@ import {
   generateToken,
   sendRecoveryPassword,
   validateToken,
+  sendUserDeleted,
 } from "../libs/user.libs.js";
 import log from "../config/logs/devlogger.js";
 
@@ -16,16 +17,25 @@ export const login = async (req, res) => {
       req.logger.error("Falta completar datos");
       return res.status(401).json("Faltan datos");
     }
-    const user = await userService.getUser(email);
-    if (!user) {
+    const userComplete = await userService.getUser(email);
+
+    if (!userComplete) {
       req.logger.error("Usuario no encontrado");
       return res.status(401).json("Usuario o Password invalidos");
     }
-    if (!isValidPassword(user, password)) {
+    if (!isValidPassword(userComplete, password)) {
       req.logger.error("Password incorrecto");
       return res.status(401).json("Usuario o contrasena invalidos");
     }
-    delete user.password;
+    if (userComplete.status === false) {
+      req.logger.error("Usuario suspendido");
+      return res.status(401).json("Usuario suspendido");
+    }
+    const user = {
+      id: userComplete._id,
+      email: userComplete.email,
+      rol: userComplete.rol,
+    };
     const token = generateToken(user);
     res.cookie("cookieToken", token, { maxAge: 3600000 });
     res.status(200).send(user);
@@ -36,7 +46,7 @@ export const login = async (req, res) => {
 };
 
 export const registerUser = async (req, res) => {
-  const { firstname, lastname, email, age, password, rol } = req.body;
+  const { firstname, lastname, email, age, password } = req.body;
   try {
     if (!firstname || !lastname || !email || !age || !password) {
       req.logger.error("Faltan datos");
@@ -53,10 +63,9 @@ export const registerUser = async (req, res) => {
       email,
       age,
       password: createHash(password),
-      rol,
     };
     await userService.createUser(newUser);
-    res.status(200).render("login");
+    res.status(200).send("Usuario creado");
   } catch (err) {
     log.error(err.message);
     res.status(500).send('"Register faild"');
@@ -67,6 +76,7 @@ export const recoverpass = (req, res) => res.render("recoverpass");
 
 export const logout = (req, res) => {
   res.clearCookie("cookieToken");
+  res.status(200).send("Usuario deslogueado exitosamente");
 };
 
 export const renderHome = (req, res) => res.render("home");
@@ -216,5 +226,26 @@ export const userToPremium = async (req, res) => {
   } catch (error) {
     log.error("error");
     return res.status(500).send("Error al subir la documentacion");
+  }
+};
+
+export const allUsers = async (req, res) => {
+  try {
+    const users = await userService.getUsers();
+    return res.status(200).send({ users });
+  } catch (error) {
+    log.error(error);
+    return res.status(500).send("No se pudieron obtener los usuarios");
+  }
+};
+
+export const deleteUsers = async (req, res) => {
+  try {
+    const users = await userService.updatedUsers();
+    await userService.deleteUsers();
+    sendUserDeleted(users);
+    return res.status(200).send({ users });
+  } catch (error) {
+    return res.status(500).send("No se pudieron eliminar los usuarios");
   }
 };

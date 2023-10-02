@@ -7,14 +7,22 @@ export const getProducts = async (filter, pages, limit, SORT) =>
     sort: SORT,
   });
 
+export const getAllProducts = async () => await productModel.find({});
+
 export const createProduct = async (newProduct) =>
   await productModel.create(newProduct);
 
 export const updateProduct = async (idProduct, updateproduct) =>
   await productModel.findByIdAndUpdate(idProduct, updateproduct, { new: true });
 
-export const deleteProduct = async (idProduct) =>
-  await productModel.findByIdAndRemove(idProduct);
+export const deleteProduct = async (idProduct) => {
+  const product = await productModel.findById(idProduct);
+  const newStatus = !product.status;
+  await productModel.updateOne(
+    { _id: idProduct },
+    { $set: { status: newStatus } }
+  );
+};
 
 export const getProductByName = async (nameProduct) =>
   await productModel.findOne({ Title: nameProduct });
@@ -30,4 +38,8 @@ export const updateStock = async (pid, quantity) => {
     { $inc: { Stock: -quantity } },
     { new: true }
   );
+};
+
+export const toTrue = async () => {
+  await productModel.updateMany({ $set: { owner: "admin" } });
 };

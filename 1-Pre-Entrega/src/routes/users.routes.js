@@ -8,6 +8,10 @@ const userRouter = express.Router();
 
 userRouter.get("/", usermanager.renderHome);
 
+userRouter.get("/api/users", usermanager.allUsers);
+
+userRouter.put("/api/users", usermanager.deleteUsers);
+
 userRouter.get("/register", usermanager.renderRegister);
 
 userRouter.get("/current", hasToken("jwt"), usermanager.current);

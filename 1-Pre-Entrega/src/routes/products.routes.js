@@ -10,13 +10,16 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-  createMockProduct,
+  hola,
   getProductById,
+  getAllProducts,
 } from "../Controllers/product.controller.js";
 
 const productRouter = express.Router();
 
 productRouter.get("/", hasToken("jwt"), getProducts);
+
+productRouter.get("/admin", hasToken("jwt"), isAdmin("jwt"), getAllProducts);
 
 productRouter.get("/:idProduct", hasToken("jwt"), getProductById);
 
@@ -36,6 +39,6 @@ productRouter.delete(
   deleteProduct
 );
 
-productRouter.get("/mockingproducts", createMockProduct);
+productRouter.put("/", hola);
 
 export default productRouter;

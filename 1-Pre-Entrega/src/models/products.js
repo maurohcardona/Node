@@ -29,6 +29,10 @@ const schema = new mongoose.Schema({
     type: String,
     default: "admincoder@coder.com",
   },
+  status: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 schema.plugin(mongoosepaginate);

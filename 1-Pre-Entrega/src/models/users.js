@@ -23,6 +23,7 @@ const schema = new mongoose.Schema({
   },
   lastLogin: Date,
   lastLogout: Date,
+  status: Boolean,
 });
 
 const userModel = new mongoose.model(collection, schema);
