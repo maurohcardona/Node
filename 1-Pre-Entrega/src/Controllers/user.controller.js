@@ -1,15 +1,16 @@
 import * as userService from "../services/user.services.js";
 import { isValidPassword, createHash } from "../utils.js";
 import { getCartByUserId } from "../services/cart.services.js";
-
+import config from "../config/config.js";
 import {
   generateToken,
-  generarTokenReset,
   sendRecoveryPassword,
   validateToken,
   sendUserDeleted,
 } from "../libs/user.libs.js";
 import log from "../config/logs/devlogger.js";
+
+const apiFront = config.front.baseUrl;
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -98,7 +99,7 @@ export const failedRegister = (req, res) => {
 export const githubToken = (req, res) => {
   const token = req.user;
   res.cookie("cookieToken", token, { maxAge: 3600000 });
-  res.status(200).send(token);
+  res.redirect(`${apiFront}/productos`);
 };
 
 export const passwordRecovery = async (req, res) => {

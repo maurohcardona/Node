@@ -6,6 +6,8 @@ import config from "./config.js";
 import jwtp from "passport-jwt";
 import jwt from "jsonwebtoken";
 
+const apiFront = config.front.baseUrl;
+
 const clientId = config.passport.clientId;
 const clientSecret = config.passport.clientSecret;
 const callbackUrl = config.passport.callbackUrl;
@@ -52,11 +54,12 @@ const initializePassport = () => {
             );
             done(null, token);
           } else {
-            const { firstname, lastname, email, cart, age } = user;
+            const { firstname, lastname, email, age } = user;
             const token = jwt.sign(
               { firstname, lastname, email, age },
               "SecretCode"
             );
+
             done(null, token);
           }
         } catch (error) {
@@ -75,7 +78,6 @@ const initializePassport = () => {
       },
       async (jwt_payload, done) => {
         try {
-          // (jwt_paconsole.logyload);
           return done(null, jwt_payload);
         } catch (error) {
           return done(error);
