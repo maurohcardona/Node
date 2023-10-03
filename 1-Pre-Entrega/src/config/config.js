@@ -33,4 +33,9 @@ config.url = {
   baseUrl: process.env.baseUrl,
   recoveryPassUrl: process.env.recoveryPassUrl,
 };
+
+config.front = {
+  baseUrl: process.env.apiFront,
+};
+
 export default config;

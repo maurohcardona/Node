@@ -1520,3 +1520,55 @@ error: Cannot read properties of null (reading '_id')
 error: Cannot read properties of null (reading 'status')
 error: Usuario no encontrado
 error: Usuario no encontrado
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Invalid Token
+error: Error:  jwt.sing is not a function {"stack":"TypeError: jwt.sing is not a function\n    at generarTokenReset (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/libs/user.libs.js:25:7)\n    at passwordRecovery (file:///C:/Users/mauro/OneDrive/Documentos/Curso%20Backend/Node/1-Pre-Entrega/src/Controllers/user.controller.js:115:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+error: Password incorrecto

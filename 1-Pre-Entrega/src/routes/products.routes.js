@@ -10,7 +10,6 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-  hola,
   getProductById,
   getAllProducts,
 } from "../Controllers/product.controller.js";
@@ -38,7 +37,5 @@ productRouter.delete(
   isOwnerProduct,
   deleteProduct
 );
-
-productRouter.put("/", hola);
 
 export default productRouter;

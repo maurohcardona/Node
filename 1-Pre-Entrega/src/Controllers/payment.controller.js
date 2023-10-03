@@ -1,5 +1,6 @@
 import mercadopago from "mercadopago";
-import { finalCart, updateStock } from "../libs/cart.libs.js";
+import * as ticketService from "../services/ticket.services.js";
+import { finalCart, updateStock, createTicket } from "../libs/cart.libs.js";
 import { createCart } from "../services/cart.services.js";
 
 export const createOrder = async (req, res) => {
@@ -30,7 +31,7 @@ export const createOrder = async (req, res) => {
       pending: "http://localhost:8080/pagos/pending",
     },
 
-    notification_url: `https://281c-186-152-163-130.ngrok.io/pagos/${id}/webhook`,
+    notification_url: `https://0157-181-119-72-228.ngrok.io/pagos/${id}/webhook`,
     statement_descriptor: "maurohcardona@gmail.com",
     additional_info: "maurohcardona@gmail.com",
   });
@@ -53,6 +54,8 @@ export const receiveWebhook = async (req, res) => {
     const newCart = finalCart(cart, user.id, total);
     await updateStock(cart);
     await createCart(newCart);
+    const ticket = await createTicket(newCart);
+    await ticketService.createTicket(ticket);
   }
 
   res.send("Compra exitosa");

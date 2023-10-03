@@ -6,13 +6,9 @@ import { uploader } from "../utils.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/", usermanager.renderHome);
-
 userRouter.get("/api/users", usermanager.allUsers);
 
 userRouter.put("/api/users", usermanager.deleteUsers);
-
-userRouter.get("/register", usermanager.renderRegister);
 
 userRouter.get("/current", hasToken("jwt"), usermanager.current);
 
@@ -20,13 +16,9 @@ userRouter.post("/register", usermanager.registerUser);
 
 userRouter.get("/failregister", usermanager.failedRegister);
 
-userRouter.get("/login", usermanager.renderLogin);
-
 userRouter.post("/login", usermanager.login);
 
 userRouter.get("/logout", hasToken("jwt"), usermanager.logout);
-
-userRouter.get("/recoverpass", usermanager.recoverpass);
 
 userRouter.get(
   "/api/auth/github/github",

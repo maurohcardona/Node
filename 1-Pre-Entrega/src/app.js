@@ -22,10 +22,12 @@ app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 const port = config.server.port;
+const apiFront = config.front.baseUrl;
+
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: apiFront,
     credentials: true,
   })
 );

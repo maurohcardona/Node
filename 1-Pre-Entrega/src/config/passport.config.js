@@ -3,7 +3,6 @@ import * as userService from "../services/user.services.js";
 import GitHubStrategy from "passport-github2";
 import "dotenv/config";
 import config from "./config.js";
-import * as cartService from "../services/cart.services.js";
 import jwtp from "passport-jwt";
 import jwt from "jsonwebtoken";
 

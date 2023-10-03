@@ -120,9 +120,9 @@ export const deleteProduct = async (req, res) => {
     const { idProduct } = req.params;
     const product = await productService.getProductById(idProduct);
     const user = await getUser(product.owner);
-    // if (user.rol === "premium") {
-    //   sendProductDeleted(product.owner, product.Title);
-    // }
+    if (user.rol === "premium") {
+      sendProductDeleted(product.owner, product.Title);
+    }
     await productService.deleteProduct(idProduct);
     res.status(200).send("Product deleted");
   } catch (error) {
@@ -145,10 +145,4 @@ export const getProductById = async (req, res) => {
   const product = await productService.getProductById(idProduct);
 
   res.status(200).send(product);
-};
-
-export const hola = async (req, res) => {
-  console.log("hola");
-  await productService.toTrue();
-  res.status(200).send("actualizados todos los productos");
 };

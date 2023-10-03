@@ -12,9 +12,6 @@ export const checkStocks = async (cart) => {
       errorMessages.push(`Stock insuficiente en el producto ${item.Title}`);
       return errorMessages;
     }
-    // } else {
-    //   await productService.updateStock(idProduct, quantity);
-    // }
   });
 
   try {

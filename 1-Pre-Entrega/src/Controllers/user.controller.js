@@ -4,6 +4,7 @@ import { getCartByUserId } from "../services/cart.services.js";
 
 import {
   generateToken,
+  generarTokenReset,
   sendRecoveryPassword,
   validateToken,
   sendUserDeleted,
@@ -50,12 +51,12 @@ export const registerUser = async (req, res) => {
   try {
     if (!firstname || !lastname || !email || !age || !password) {
       req.logger.error("Faltan datos");
-      return res.render("register", { message: "Faltan datos" });
+      return res.status(401).send({ message: "Faltan datos" });
     }
     let user = await userService.getUser(email);
     if (user) {
       req.logger.info("User registered");
-      return res.render("register", { message: "User registered" });
+      return res.status(401).send({ message: "User registered" });
     }
     const newUser = {
       firstname,
@@ -72,17 +73,11 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const recoverpass = (req, res) => res.render("recoverpass");
-
 export const logout = async (req, res) => {
   await userService.lastLogout(req.user.id);
   res.clearCookie("cookieToken");
   res.status(200).send("Usuario deslogueado exitosamente");
 };
-
-export const renderHome = (req, res) => res.render("home");
-
-export const renderRegister = (req, res) => res.render("register");
 
 export const current = async (req, res) => {
   try {
@@ -95,44 +90,33 @@ export const current = async (req, res) => {
   } catch (error) {}
 };
 
-export const register = (req, res) => {
-  res.redirect("/login");
-};
-
 export const failedRegister = (req, res) => {
   req.logger.error("Failed strategy");
   res.send({ error: "failed" });
 };
 
-export const renderLogin = (req, res) => res.render("login");
-
 export const githubToken = (req, res) => {
   const token = req.user;
   res.cookie("cookieToken", token, { maxAge: 3600000 });
-  res.redirect("/products?limit=6");
+  res.status(200).send(token);
 };
 
 export const passwordRecovery = async (req, res) => {
   const { correo } = req.body;
 
   if (!correo)
-    return res
-      .status(500)
-      .render("recoverpass", { message: "Debe ingresar un correo" });
+    return res.status(401).json({ message: "Debe ingresar un correo" });
 
   try {
     const user = await userService.getUser(correo);
 
-    if (!user)
-      return res
-        .status(404)
-        .render("recoverpass", { message: "Usuario inexistente" });
+    if (!user) return res.status(404).json({ message: "Usuario inexistente" });
 
     const token = generateToken(correo);
 
     sendRecoveryPassword(correo, token);
 
-    res.status(200).render("sentmail");
+    res.status(200).json({ message: "Correo enviado" });
   } catch (e) {
     log.error("Error: ", e);
     res.status(500).send("Error al enviar el mail");
@@ -141,7 +125,6 @@ export const passwordRecovery = async (req, res) => {
 
 export const recoverPassword = (req, res) => {
   const { token } = req.query;
-  const { correo } = req.query;
 
   try {
     const checkToken = validateToken(token);
@@ -150,33 +133,29 @@ export const recoverPassword = (req, res) => {
       log.error("Invalid Token");
       return res.status(401).send("Acceso denegado");
     }
-    res.cookie("cookieToken", token, { maxAge: 3600000, httpOnly: true });
-    res.status(200).render("passrecover", { token, correo });
+    res.cookie("cookieToken", token, { maxAge: 3600000 });
+    res.status(200).send(true);
   } catch (error) {
     log.error(error);
-    res.status(500).send("Error interno");
+    res.status(500).send("Error Interno");
   }
 };
 
 export const resetPassword = async (req, res) => {
-  const { password } = req.body;
-  const { correo } = req.query;
+  const { correo, password } = req.body;
 
   if (!password) {
-    return res.render("passrecover", {
-      correo,
-      message: "Debe ingresar una contrasena",
-    });
+    return res.status(401).json("Debe ingresar una password");
   }
 
   try {
     const hashPassword = createHash(password);
     await userService.updatePassword(correo, hashPassword);
     res.clearCookie("cookieToken");
-    res.status(200).render("resetpass");
+    res.status(200).json("Password actualizado");
   } catch (error) {
     log.error(error);
-    res.status(500).send("Error al cambiar la contrasena");
+    res.status(500).json("Error al cambiar la contrasena");
   }
 };
 
@@ -187,9 +166,6 @@ export const userDocuments = async (req, res) => {
       log.error("No se pudo cargar la imagen");
       return res.status(400).send({ error: "No se pudo cargar el documento" });
     }
-    console.log("uid: " + uid);
-    console.log("direct: " + direct);
-    console.log("ident: " + ident);
 
     const newDocument = {
       name: ident,
@@ -199,7 +175,8 @@ export const userDocuments = async (req, res) => {
     await userService.uploadDocument(uid, newDocument);
     res.status(200).send("Document upload sussesfully");
   } catch (error) {
-    console.log(error);
+    log.error("Error al cargar documento");
+    return res.status(500).jason("Error interno");
   }
 };
 

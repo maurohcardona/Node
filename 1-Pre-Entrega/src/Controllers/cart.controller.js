@@ -1,6 +1,5 @@
 import * as cartService from "../services/cart.services.js";
-import * as ticketService from "../services/ticket.services.js";
-import { checkStocks, createTicket } from "../libs/cart.libs.js";
+import { checkStocks } from "../libs/cart.libs.js";
 import log from "../config/logs/devlogger.js";
 
 export const createCart = async (req, res) => {
@@ -11,10 +10,6 @@ export const createCart = async (req, res) => {
     if (hasStock !== "ok") {
       return res.status(400).send(hasStock);
     }
-    // if (hasStock.length >= 1) throw new Error(hasStock);
-    // await cartService.createCart(newCart);
-    // const ticket = await createTicket(newCart);
-    // await ticketService.createTicket(ticket);
     res.status(200).send("Cart created successfully");
   } catch (error) {
     log.error(error.message);
@@ -43,10 +38,7 @@ export const getCartById = async (req, res) => {
     const newProducts = cart.Cart.map((data) => {
       return {
         Title: data.cart.Title,
-        //Description: data.cart.Description,
         Price: data.cart.Price,
-        //Stock: data.cart.Stock,
-        //Category: data.cart.Category,
         Thumbnail: data.cart.Thumbnail,
         id: data.cart._id,
         quantity: data.quantity,
