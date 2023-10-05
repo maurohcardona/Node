@@ -75,9 +75,14 @@ export const registerUser = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  await userService.lastLogout(req.user.id);
-  res.clearCookie("cookieToken");
-  res.status(200).send("Usuario deslogueado exitosamente");
+  try {
+    await userService.lastLogout(req.user.id);
+    res.clearCookie("cookieToken");
+    res.status(200).send("Usuario deslogueado exitosamente");
+  } catch (error) {
+    error.log(error);
+    res.status(501).send("Error al desloguearse");
+  }
 };
 
 export const current = async (req, res) => {
@@ -117,7 +122,7 @@ export const passwordRecovery = async (req, res) => {
 
     sendRecoveryPassword(correo, token);
 
-    res.status(200).json({ message: "Correo enviado" });
+    res.status(200).json("Correo enviado");
   } catch (e) {
     log.error("Error: ", e);
     res.status(500).send("Error al enviar el mail");
